@@ -1,0 +1,13 @@
+{
+    "project_dir": "C:\\Users\\Matheas\\AppData\\Roaming\\Blender Foundation\\Blender\\4.1\\scripts\\addons\\exporter_tool2",
+    "asset_types": [
+        {
+            "name_id": "01",
+            "display_name": "DisplayName_1"
+        },
+        {
+            "name_id": "02",
+            "display_name": "DisplayName_2"
+        }
+    ]
+}

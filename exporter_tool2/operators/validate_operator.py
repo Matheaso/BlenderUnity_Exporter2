@@ -1,4 +1,9 @@
+from pathlib import Path
+
 import bpy
+
+from ..core import serialization
+from ..core.asset_type_data import AssetTypeData, ExporterConfigData
 from ..core.object_data import create_export_context, ExportContext
 
 
@@ -24,3 +29,31 @@ class EXPORT_TOOL_validate(bpy.types.Operator):
 
         return {'FINISHED'}
 
+
+class EXPORT_TOOL_test(bpy.types.Operator):
+    bl_idname = "export.test"
+    bl_label = "test Operator"
+    bl_description = "test Operator"
+
+    def execute(self, context):
+        self.report({'INFO'}, "test Operator")
+
+        assets = (
+            AssetTypeData(
+                "01",
+                "DisplayName_1"
+            ),
+            AssetTypeData(
+                "02",
+                "DisplayName_2"
+            )
+        )
+
+        config = ExporterConfigData(
+            Path(__file__).parent.parent,
+            assets,
+        )
+
+        serialization.save_config(config)
+
+        return {'FINISHED'}
