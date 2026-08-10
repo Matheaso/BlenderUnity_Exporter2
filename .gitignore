@@ -1,0 +1,85 @@
+battle_plan.md
+
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+
+# -------------------------
+# PyCharm / JetBrains
+# -------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# -------------------------
+# Blender
+# -------------------------
+*.blend1
+*.blend2
+*.blend@
+*.blend~
+*.blend.autosave
+
+# Blender temporary files
+*.tmp
+*.temp
+
+# -------------------------
+# OS
+# -------------------------
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# -------------------------
+# Logs
+# -------------------------
+*.log
+
+# -------------------------
+# Local configuration
+# -------------------------
+.env
+.env.*
+local_config.py
+config.local.json
+
+# -------------------------
+# Exported plugin packages
+# -------------------------
+*.zip
+
+.idea/workspace.xml
+.idea/BlenderUnity_Exporter2.iml
+/.idea
