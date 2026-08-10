@@ -3,7 +3,7 @@
     "asset_types": [
         {
             "name_id": "01",
-            "display_name": "Common",
+            "display_name": "DisplayName_1",
             "naming_convention": {
                 "prefix": "",
                 "suffix": ""
@@ -14,7 +14,7 @@
         },
         {
             "name_id": "02",
-            "display_name": "Static Mesh",
+            "display_name": "DisplayName_2",
             "naming_convention": {
                 "prefix": "SM_",
                 "suffix": ""

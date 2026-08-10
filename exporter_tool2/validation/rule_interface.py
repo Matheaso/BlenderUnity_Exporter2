@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 
-from ..core.asset_type_data import AssetTypeData
+from ..core.config_data import AssetTypeData
 from ..core.object_data import ExportContext
 
 
-class IRule(ABC):
+class IValidatonRule(ABC):
     @abstractmethod
     def validate(
             self,

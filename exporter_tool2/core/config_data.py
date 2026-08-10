@@ -17,7 +17,6 @@ class AssetTypeData:
     rule_id: tuple[str, ...]
 
 
-
 @dataclass(frozen=True)
 class ExporterConfigData:
     project_dir: Path
@@ -29,6 +28,7 @@ class ExporterConfigData:
             (asset_type.name_id, asset_type.display_name, "")
             for asset_type in self.asset_types
         )
+
 
 def config_to_dict(config: ExporterConfigData) -> dict:
     return {

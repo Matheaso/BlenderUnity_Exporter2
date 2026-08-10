@@ -1,8 +1,19 @@
-import bpy
-from .operators import registration as operator_registration
-from .ui import registration as ui_registration
-from .properties import registration as properties_registration
-from .tools import suffixer as suffixer
+from .operators import (
+    register as operator_registration,
+    unregister as operator_unregister
+)
+from .ui import (
+    register as ui_register,
+    unregister as ui_unregister
+)
+from .properties import (
+    register as properties_register,
+    unregister as properties_unregister
+)
+from .tools.suffixer import (
+    register as suffixer_register,
+    unregister as suffixer_unregister
+)
 
 bl_info = {
     "name": "custom_exporter v2",
@@ -17,17 +28,16 @@ bl_info = {
 
 
 def register():
-    operator_registration.register()
-    ui_registration.register()
-    properties_registration.register()
-    suffixer.register()
+    operator_registration()
+    ui_register()
+    properties_register()
+    suffixer_register()
 
 
     return None
 
 
 def unregister():
-    operator_registration.unregister()
     return None
 
 

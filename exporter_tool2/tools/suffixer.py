@@ -1,6 +1,6 @@
 import bpy
 
-from ..core.asset_type_data import NamingConvention
+from ..core.config_data import NamingConvention
 from ..core.serialization import load_config
 
 

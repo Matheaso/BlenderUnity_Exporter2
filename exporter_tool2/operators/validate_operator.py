@@ -2,9 +2,9 @@ from pathlib import Path
 
 import bpy
 
-from ..core.asset_type_data import NamingConvention
+from ..core.config_data import NamingConvention
 from ..core import serialization
-from ..core.asset_type_data import AssetTypeData, ExporterConfigData
+from ..core.config_data import AssetTypeData, ExporterConfigData
 from ..core.object_data import create_export_context, ExportContext
 
 
