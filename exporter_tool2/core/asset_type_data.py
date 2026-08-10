@@ -3,9 +3,20 @@ from pathlib import Path
 
 
 @dataclass(frozen=True)
+class NamingConvention:
+    prefix: str
+    suffix: str
+
+
+@dataclass(frozen=True)
 class AssetTypeData:
     name_id: str
     display_name: str
+
+    naming_convention: NamingConvention
+    rule_id: tuple[str, ...]
+
+
 
 @dataclass(frozen=True)
 class ExporterConfigData:
@@ -26,6 +37,11 @@ def config_to_dict(config: ExporterConfigData) -> dict:
             {
                 "name_id": asset.name_id,
                 "display_name": asset.display_name,
+                "naming_convention": {
+                    "prefix": asset.naming_convention.prefix,
+                    "suffix": asset.naming_convention.suffix,
+                },
+                "rule_id": asset.rule_id,
             }
             for asset in config.asset_types
         ],

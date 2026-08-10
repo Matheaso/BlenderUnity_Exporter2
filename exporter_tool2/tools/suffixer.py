@@ -1,5 +1,9 @@
 import bpy
 
+from ..core.asset_type_data import NamingConvention
+from ..core.serialization import load_config
+
+
 class SUFFIXER_OT_suffix(bpy.types.Operator):
     bl_idname = "suffixer.suffix"
     bl_label = "suffix Operator"
@@ -114,12 +118,23 @@ class SUFFIXER_OT_auto(bpy.types.Operator):
     bl_label = "auto Operator"
     bl_description = "Auto Operator"
 
-    #LOAD FROM JSON
-
     def execute(self, context):
+        self.report({'INFO'}, "Suffix Auto")
         if not context.selected_objects:
             self.report({'ERROR'}, "No objects selected")
-            return {'FINISHED'}
+            return {'CANCELLED'}
+
+        asset_type_id = context.scene.export_settings.asset_type
+        config = load_config()
+
+        for t in config.asset_types:
+            if t.name_id == asset_type_id :
+                self.report({'INFO'}, "ID Found")
+                name_convention = t.naming_convention
+
+                for obj in context.selected_objects:
+                    obj.name = name_convention.prefix + obj.name + name_convention.suffix
+
 
         return {'FINISHED'}
 

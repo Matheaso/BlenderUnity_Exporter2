@@ -2,6 +2,7 @@ from pathlib import Path
 
 import bpy
 
+from ..core.asset_type_data import NamingConvention
 from ..core import serialization
 from ..core.asset_type_data import AssetTypeData, ExporterConfigData
 from ..core.object_data import create_export_context, ExportContext
@@ -41,11 +42,21 @@ class EXPORT_TOOL_test(bpy.types.Operator):
         assets = (
             AssetTypeData(
                 "01",
-                "DisplayName_1"
+                "DisplayName_1",
+                NamingConvention(
+                    "",
+                    "",
+                ),
+                ("",)
             ),
             AssetTypeData(
                 "02",
-                "DisplayName_2"
+                "DisplayName_2",
+                NamingConvention(
+                    "SM_",
+                    "",
+                ),
+                ("",)
             )
         )
 
