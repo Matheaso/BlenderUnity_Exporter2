@@ -12,6 +12,13 @@ class ExporterConfigData:
     project_dir: Path
     asset_types: tuple[AssetTypeData, ...]
 
+    @property
+    def to_tuple_str(self) -> tuple[tuple[str, str, str], ...]:
+        return tuple(
+            (asset_type.name_id, asset_type.display_name, "")
+            for asset_type in self.asset_types
+        )
+
 def config_to_dict(config: ExporterConfigData) -> dict:
     return {
         "project_dir": str(config.project_dir),
