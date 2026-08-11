@@ -26,7 +26,6 @@ class ExporterRuleItem(bpy.types.PropertyGroup):
         name="Rule ID",
     )
 
-
 class ExporterAssetTypeProperties(bpy.types.PropertyGroup):
     name_id: StringProperty(
         name="ID",

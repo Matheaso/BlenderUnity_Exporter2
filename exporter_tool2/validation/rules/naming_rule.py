@@ -1,3 +1,4 @@
+from ..logging.validation_reporting import ValidationReport
 from ...core.config_data import AssetTypeData
 from ...core.object_data import ExportContext
 from ...validation.rule_interface import IValidationRule
@@ -10,5 +11,13 @@ class NameRule(IValidationRule):
                    "- Can't have default blender name"
                    )
 
-    def validate(self, export_context: ExportContext, asset_type_data: AssetTypeData):
-        pass
+    def validate(
+            self,
+            export_context: ExportContext,
+            asset_type_data: AssetTypeData
+    ) -> ValidationReport:
+        issues = []
+
+        return ValidationReport(
+            issues=tuple(issues)
+        )

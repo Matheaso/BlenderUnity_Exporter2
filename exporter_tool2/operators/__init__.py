@@ -1,12 +1,9 @@
 import bpy
-from .validate_operator import EXPORT_TOOL_validate, EXPORT_TOOL_test
+from .export_operator import  EXPORT_TOOL_exporter
 
 CLASSES = (
-    EXPORT_TOOL_validate,
-    EXPORT_TOOL_test
-
+    EXPORT_TOOL_exporter,
 )
-
 
 def register():
     for cls in CLASSES:

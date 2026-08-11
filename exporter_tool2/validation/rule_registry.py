@@ -6,7 +6,7 @@ RULE_REGISTRY = {
     UniformScale.rule_id: UniformScale,
 }
 
-def get_rule(rule_id: str):
+def get_rule_class(rule_id: str):
     return RULE_REGISTRY.get(rule_id)
 
 def get_rule_items() -> tuple[tuple[str, str, str], ...]:

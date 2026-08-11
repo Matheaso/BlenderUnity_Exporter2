@@ -1,7 +1,7 @@
 import bpy
 
 from ..tools.suffixer import SUFFIXER_OT_prefix, SUFFIXER_OT_replace, SUFFIXER_OT_suffix, SUFFIXER_OT_auto
-from ..operators.validate_operator import EXPORT_TOOL_validate, EXPORT_TOOL_test
+from ..operators.export_operator import EXPORT_TOOL_exporter
 
 
 class EXPORTERTOOL_PT_sidebar(bpy.types.Panel):
@@ -16,19 +16,10 @@ class EXPORTERTOOL_PT_sidebar(bpy.types.Panel):
         layout = self.layout
 
         layout.operator(
-            EXPORT_TOOL_validate.bl_idname,
+            EXPORT_TOOL_exporter.bl_idname,
             text="Export selected",
         )
 
-        layout.operator(
-            EXPORT_TOOL_validate.bl_idname,
-            text="Validate",
-        )
-
-        layout.operator(
-            EXPORT_TOOL_test.bl_idname,
-            text="SerializationTest",
-        )
 
 
 
