@@ -1,10 +1,15 @@
 from abc import ABC, abstractmethod
+from typing import ClassVar
 
 from ..core.config_data import AssetTypeData
 from ..core.object_data import ExportContext
 
 
-class IValidatonRule(ABC):
+class IValidationRule(ABC):
+    rule_id: ClassVar[str]
+    display_name: ClassVar[str]
+    description: ClassVar[str]
+
     @abstractmethod
     def validate(
             self,

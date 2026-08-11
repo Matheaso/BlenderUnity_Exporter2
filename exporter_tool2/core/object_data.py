@@ -2,14 +2,27 @@ import bpy
 from dataclasses import dataclass
 
 
+float3 = tuple[float, float, float]
+
 @dataclass(frozen=True)
 class ObjectData:
     asset_name: str
     asset_type: str
 
+    pivot_location: float3
+    scale: float3
+
     @property
     def is_mesh(self) -> bool:
         return self.asset_type == "MESH"
+
+    @property
+    def is_pivot_zeroed(self) -> bool:
+        return  self.pivot_location == (0.0, 0.0, 0.0)
+
+    @property
+    def is_uniform_scale(self) -> bool:
+        return self.scale == (1.0, 1.0, 1.0)
 
 
 
@@ -37,6 +50,8 @@ def create_export_context(blender_context: bpy.types.Context) -> ExportContext:
         data = ObjectData(
             asset_name=obj.name,
             asset_type=obj.type,
+            pivot_location=tuple(obj.location),
+            scale=tuple(obj.scale),
         )
         objects.append(data)
 

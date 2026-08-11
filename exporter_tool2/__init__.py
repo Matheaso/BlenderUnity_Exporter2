@@ -15,6 +15,10 @@ from .tools.suffixer import (
     unregister as suffixer_unregister
 )
 
+    register as config_tools_register,
+    unregister as config_tools_unregister
+)
+
 bl_info = {
     "name": "custom_exporter v2",
     "author": "Maciej Matheas Sojka",
@@ -28,10 +32,11 @@ bl_info = {
 
 
 def register():
+    properties_register()
     operator_registration()
     ui_register()
-    properties_register()
     suffixer_register()
+    config_tools_register()
 
 
     return None

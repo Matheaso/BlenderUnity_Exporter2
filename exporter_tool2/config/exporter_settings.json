@@ -2,26 +2,33 @@
     "project_dir": "C:\\Users\\Matheas\\AppData\\Roaming\\Blender Foundation\\Blender\\4.1\\scripts\\addons\\exporter_tool2",
     "asset_types": [
         {
-            "name_id": "01",
-            "display_name": "DisplayName_1",
+            "name_id": "TREE",
+            "display_name": "Tree",
             "naming_convention": {
                 "prefix": "",
                 "suffix": ""
             },
-            "rule_id": [
-                ""
-            ]
+            "rule_id": []
         },
         {
-            "name_id": "02",
-            "display_name": "DisplayName_2",
+            "name_id": "HOUSE",
+            "display_name": "House",
             "naming_convention": {
-                "prefix": "SM_",
+                "prefix": "HOU_",
                 "suffix": ""
             },
             "rule_id": [
-                ""
+                "naming_rule"
             ]
+        },
+        {
+            "name_id": "new_asset",
+            "display_name": "New Asset Type",
+            "naming_convention": {
+                "prefix": "",
+                "suffix": ""
+            },
+            "rule_id": []
         }
     ]
 }

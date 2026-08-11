@@ -2,12 +2,11 @@ from ...core.config_data import AssetTypeData
 from ...core.object_data import ExportContext
 from ...validation.rule_interface import IValidationRule
 
-class NameRule(IValidationRule):
-    rule_id = "naming_rule"
-    display_name = "Naming Convention"
+class UniformScale(IValidationRule):
+    rule_id = "uniform_scale"
+    display_name = "Uniform Scale"
     description = ("Rule:\n"
-                   "- Needs proper prefixes and suffixes\n"
-                   "- Can't have default blender name"
+                   "- Scale needs to be freezed)\n"
                    )
 
     def validate(self, export_context: ExportContext, asset_type_data: AssetTypeData):

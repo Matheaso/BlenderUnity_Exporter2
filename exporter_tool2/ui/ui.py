@@ -16,7 +16,7 @@ class EXPORTERTOOL_PT_sidebar(bpy.types.Panel):
         layout = self.layout
 
         layout.operator(
-            EXPORTERTOOL_PT_sidebar.bl_idname,
+            EXPORT_TOOL_validate.bl_idname,
             text="Export selected",
         )
 
