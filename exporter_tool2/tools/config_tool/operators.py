@@ -219,6 +219,7 @@ def scene_to_config(scene) -> ExporterConfigData:
                     rule.rule_id
                     for rule in item.rules
                 ),
+                relative_path=item.relative_path,
             )
             for item in scene.exporter_asset_types
         ),
@@ -235,6 +236,7 @@ def config_to_scene(scene, config: ExporterConfigData) -> None:
 
         item.naming_prefix = asset_data.naming_convention.prefix
         item.naming_suffix = asset_data.naming_convention.suffix
+        item.relative_path = asset_data.relative_path
 
         item.rules.clear()
 

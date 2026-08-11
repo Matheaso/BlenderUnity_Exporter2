@@ -152,6 +152,19 @@ class EXPORTER_PT_asset_types(bpy.types.Panel):
             "naming_suffix",
         )
 
+        # Export Path
+        path_box = layout.box()
+        path_box.label(
+            text="Export Path",
+            icon="FILE_FOLDER",
+        )
+
+        path_box.prop(
+            asset_type,
+            "relative_path",
+            text="Relative Path",
+        )
+
         # Rules
         rules_box = layout.box()
         rules_box.label(

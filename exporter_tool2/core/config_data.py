@@ -15,6 +15,7 @@ class AssetTypeData:
 
     naming_convention: NamingConvention
     rule_id: tuple[str, ...]
+    relative_path: str = "Assets/Graphics/Import"
 
 
 @dataclass(frozen=True)
@@ -42,6 +43,7 @@ def config_to_dict(config: ExporterConfigData) -> dict:
                     "suffix": asset.naming_convention.suffix,
                 },
                 "rule_id": asset.rule_id,
+                "relative_path": asset.relative_path,
             }
             for asset in config.asset_types
         ],

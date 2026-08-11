@@ -1,5 +1,5 @@
 {
-    "project_dir": "C:\\Users\\Matheas\\AppData\\Roaming\\Blender Foundation\\Blender\\4.1\\scripts\\addons\\exporter_tool2",
+    "project_dir": "D:\\GAMEDE_PLUS\\LibraURP\\Assets\\Libra",
     "asset_types": [
         {
             "name_id": "ENVIRO",
@@ -10,7 +10,8 @@
             },
             "rule_id": [
                 "uniform_scale"
-            ]
+            ],
+            "relative_path": "Assets/Graphics/Enviro"
         },
         {
             "name_id": "FOLIAGE",
@@ -21,7 +22,18 @@
             },
             "rule_id": [
                 "naming_rule"
-            ]
+            ],
+            "relative_path": "Assets/Graphics/Foliage"
+        },
+        {
+            "name_id": "NORULES",
+            "display_name": "No Rules",
+            "naming_convention": {
+                "prefix": "",
+                "suffix": ""
+            },
+            "rule_id": [],
+            "relative_path": "Assets/Graphics/Import"
         }
     ]
 }

@@ -51,4 +51,11 @@ class ExporterAssetTypeProperties(bpy.types.PropertyGroup):
         default=0,
     )
 
+    relative_path: bpy.props.StringProperty(
+        name="Relative Path",
+        default="Assets/Graphics/Import",
+    )
+
+
+
 

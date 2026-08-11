@@ -1,5 +1,6 @@
 import bpy
 
+from ..core.config_data import ExporterConfigData
 from ..validation.logging.validation_reporting import ValidationReport
 from ..validation.logging.blender_report import BlenderValidationReporter
 from ..core.config_data import AssetTypeData
@@ -23,7 +24,8 @@ class EXPORT_TOOL_exporter(bpy.types.Operator):
             return {'FINISHED'}
 
         export_context = create_export_context(context)
-        active_asset_type = get_active_asset_type(context)
+        config = load_config()
+        active_asset_type = get_active_asset_type(context, config)
 
         for rule_id in active_asset_type.rule_id:
             rule_class = get_rule_class(rule_id)
@@ -45,12 +47,45 @@ class EXPORT_TOOL_exporter(bpy.types.Operator):
             self.report({'ERROR'}, "Export failed")
             return {"CANCELLED"}
 
+        ## EXPORT ##
+
+        export_dir = (
+                config.project_dir
+                / active_asset_type.relative_path
+        )
+
+        export_dir.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        filename = context.selected_objects[0].name
+        filepath = export_dir / f"{filename}.fbx"
+
+        bpy.ops.export_scene.fbx(
+            filepath=str(filepath),
+            use_selection=True,
+            apply_unit_scale=True,
+            apply_scale_options="FBX_SCALE_ALL",
+            axis_forward="-Z",
+            axis_up="Y",
+            add_leaf_bones=False,
+            bake_anim=False,
+            use_space_transform=True,
+            bake_space_transform=True,
+        )
+
+        self.report(
+            {"INFO"},
+            f"Exported to: {filepath}",
+        )
+
         return {'FINISHED'}
 
 
 
-def get_active_asset_type(context: bpy.types.Context) -> AssetTypeData:
-    asset_types = load_config().asset_types
+def get_active_asset_type(context: bpy.types.Context, config: ExporterConfigData) -> AssetTypeData:
+    asset_types = config.asset_types
     asset_type_id = context.scene.export_settings.asset_type
 
     asset_type = next(

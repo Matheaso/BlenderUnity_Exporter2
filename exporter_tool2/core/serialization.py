@@ -33,12 +33,13 @@ def load_config() -> ExporterConfigData:
                 suffix=asset["naming_convention"]["suffix"],
             ),
             rule_id=tuple(asset["rule_id"]),
+            relative_path=asset["relative_path"],
         )
         for asset in data["asset_types"]
     )
 
     return ExporterConfigData(
-        project_dir=ROOT_DIR,
+        project_dir=Path(data["project_dir"]),
         asset_types=asset_types,
     )
 
@@ -55,11 +56,12 @@ def load_config_from(filepath: Path) -> ExporterConfigData:
                 suffix=asset["naming_convention"]["suffix"],
             ),
             rule_id=tuple(asset["rule_id"]),
+            relative_path=asset["relative_path"],
         )
         for asset in data["asset_types"]
     )
 
     return ExporterConfigData(
-        project_dir=ROOT_DIR,
+        project_dir=Path(data["project_dir"]),
         asset_types=asset_types,
     )
