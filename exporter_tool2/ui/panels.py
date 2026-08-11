@@ -10,7 +10,7 @@ class EXPORTERTOOL_PT_sidebar(bpy.types.Panel):
 
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "NEW"
+    bl_category = "Exporter"
 
     def draw(self, context):
         layout = self.layout
@@ -32,14 +32,13 @@ class EXPORTERTOOL_PT_sidebar(bpy.types.Panel):
 
 
 
-
 class EXPORTERTOOL_PT_main_settings(bpy.types.Panel):
     bl_idname = "EXPORTERTOOL_PT.main_settings"
-    bl_label = "EXPORT"
+    bl_label = "Main Settings"
 
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "NEW"
+    bl_category = "Exporter"
 
     def draw(self, context):
         layout = self.layout
@@ -60,7 +59,7 @@ class SUFFIXER_PT_main_settings(bpy.types.Panel):
 
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "NEW"
+    bl_category = "Exporter"
 
     def draw(self, context):
         layout = self.layout

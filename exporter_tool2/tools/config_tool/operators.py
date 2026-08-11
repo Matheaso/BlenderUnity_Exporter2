@@ -151,6 +151,11 @@ class EXPORTER_OT_rule_add(bpy.types.Operator):
 
         asset.rule_index = len(asset.rules) - 1
 
+        for window in context.window_manager.windows:
+            for area in window.screen.areas:
+                if area.type == "PROPERTIES":
+                    area.tag_redraw()
+
         return {"FINISHED"}
 
 

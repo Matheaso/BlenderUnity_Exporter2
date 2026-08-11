@@ -1,5 +1,5 @@
 import bpy
-from .ui import EXPORTERTOOL_PT_sidebar, EXPORTERTOOL_PT_main_settings, SUFFIXER_PT_main_settings
+from .panels import EXPORTERTOOL_PT_sidebar, EXPORTERTOOL_PT_main_settings, SUFFIXER_PT_main_settings
 
 CLASSES = (
     EXPORTERTOOL_PT_sidebar,

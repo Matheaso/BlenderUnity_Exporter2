@@ -54,7 +54,7 @@ class EXPORTER_UL_rules(bpy.types.UIList):
             )
 
 class EXPORTER_PT_asset_types(bpy.types.Panel):
-    bl_label = "Asset Types"
+    bl_label = "Exporter Settings"
     bl_idname = "EXPORTER_PT_asset_types"
 
     bl_space_type = "PROPERTIES"

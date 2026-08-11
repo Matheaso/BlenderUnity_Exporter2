@@ -2,33 +2,27 @@
     "project_dir": "C:\\Users\\Matheas\\AppData\\Roaming\\Blender Foundation\\Blender\\4.1\\scripts\\addons\\exporter_tool2",
     "asset_types": [
         {
-            "name_id": "TREE",
-            "display_name": "Tree",
+            "name_id": "ENVIRO",
+            "display_name": "Environment",
             "naming_convention": {
-                "prefix": "",
+                "prefix": "SM_",
                 "suffix": ""
             },
-            "rule_id": []
+            "rule_id": [
+                "naming_rule",
+                "uniform_scale"
+            ]
         },
         {
-            "name_id": "HOUSE",
-            "display_name": "House",
+            "name_id": "FOLIAGE",
+            "display_name": "Foliage",
             "naming_convention": {
-                "prefix": "HOU_",
+                "prefix": "SM_F_",
                 "suffix": ""
             },
             "rule_id": [
                 "naming_rule"
             ]
-        },
-        {
-            "name_id": "new_asset",
-            "display_name": "New Asset Type",
-            "naming_convention": {
-                "prefix": "",
-                "suffix": ""
-            },
-            "rule_id": []
         }
     ]
 }
