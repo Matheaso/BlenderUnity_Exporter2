@@ -15,6 +15,7 @@ from .tools.suffixer import (
     unregister as suffixer_unregister
 )
 
+from .tools.config_tool import (
     register as config_tools_register,
     unregister as config_tools_unregister
 )
