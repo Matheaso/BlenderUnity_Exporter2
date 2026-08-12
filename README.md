@@ -15,16 +15,19 @@ Created by **Maciej "Matheas" Sojka**
 - Rule registry for dynamic validation lookup
 
 #### Work in progress
-- ✅ Dynamic Project Path
-- Backward compatibility json
-- More validation rules
-- QoL
-- Export support for Unreal and custom pipelines
-- Export multiple meshes as separate files
-- Additional asset-type-specific windows
-- Metadata support
-- Config versioning
-- Export Profiles
+🟢 Dynamic Project Path  
+🟡 LOD support  
+🟡 Export Collection  
+🔴 Export multiple meshes as separate files  
+🔴 Metadata support  
+🔴 Additional asset-type-specific windows  
+🔴 Backward compatibility json  
+🔴 Config versioning  
+🔴 More validation rules  
+🔴 Export support for Unreal and custom pipelines  
+🔴 Export Profiles  
+🔴 Validation Log  
+🔴 QoL  
 
 ![Tool_UI_01](png/Tool_UI_01.png)
 

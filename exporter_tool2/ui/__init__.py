@@ -1,16 +1,19 @@
 import bpy
-from .panels import EXPORTERTOOL_PT_sidebar, EXPORTERTOOL_PT_main_settings, SUFFIXER_PT_main_settings
+from .panels import EXPORTER_PT_sidebar, EXPORTER_PT_main_settings, SUFFIXER_PT_main_settings, EXPORTER_PT_Temp
 
-CLASSES = (
-    EXPORTERTOOL_PT_sidebar,
-    EXPORTERTOOL_PT_main_settings,
-    SUFFIXER_PT_main_settings
-)
+CLASSES = [
+    EXPORTER_PT_sidebar,
+    EXPORTER_PT_main_settings,
+    EXPORTER_PT_Temp,
+    SUFFIXER_PT_main_settings,
+]
 
 
 def register():
     for cls in CLASSES:
         bpy.utils.register_class(cls)
+
+
 
 
 def unregister():

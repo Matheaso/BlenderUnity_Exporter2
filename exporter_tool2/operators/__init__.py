@@ -1,8 +1,11 @@
 import bpy
-from .export_operator import  EXPORT_TOOL_exporter
+
+from .create_export_package import EXPORTER_OT_CreateExportPackage
+from .export_operator import  EXPORTER_OT_exporter
 
 CLASSES = (
-    EXPORT_TOOL_exporter,
+    EXPORTER_OT_exporter,
+    EXPORTER_OT_CreateExportPackage
 )
 
 def register():
@@ -10,4 +13,5 @@ def register():
         bpy.utils.register_class(cls)
 
 def unregister():
-    pass
+    for cls in reversed(CLASSES):
+        bpy.utils.unregister_class(cls)

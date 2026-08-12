@@ -9,7 +9,7 @@ from ..validation.rule_registry import get_rule_class
 from ..core.object_data import create_export_context
 
 
-class EXPORT_TOOL_exporter(bpy.types.Operator):
+class EXPORTER_OT_exporter(bpy.types.Operator):
     bl_label = "Export Selected"
     bl_idname = "export.export_selected"
     bl_description = "Export Selected objects"

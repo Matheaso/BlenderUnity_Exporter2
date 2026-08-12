@@ -1,11 +1,12 @@
 import bpy
 
+from ..operators import EXPORTER_OT_CreateExportPackage
 from ..tools.suffixer import SUFFIXER_OT_prefix, SUFFIXER_OT_replace, SUFFIXER_OT_suffix, SUFFIXER_OT_auto
-from ..operators.export_operator import EXPORT_TOOL_exporter
+from ..operators.export_operator import EXPORTER_OT_exporter
 
 
-class EXPORTERTOOL_PT_sidebar(bpy.types.Panel):
-    bl_idname = "EXPORT_TOOL2_PT_sidebar"
+class EXPORTER_PT_sidebar(bpy.types.Panel):
+    bl_idname = "exporter.sidebar"
     bl_label = "EXPORT"
 
     bl_space_type = "VIEW_3D"
@@ -16,15 +17,41 @@ class EXPORTERTOOL_PT_sidebar(bpy.types.Panel):
         layout = self.layout
 
         layout.operator(
-            EXPORT_TOOL_exporter.bl_idname,
+            EXPORTER_OT_exporter.bl_idname,
             text="Export selected",
         )
 
 
+class EXPORTER_PT_Temp(bpy.types.Panel):
+    bl_idname = "exporter.temp"
+    bl_label = "Export Package"
+
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "UI"
+    bl_category = "Exporter"
+
+    def draw(self, context):
+        layout = self.layout
+
+        layout.operator(
+            EXPORTER_OT_CreateExportPackage.bl_idname,
+            text="Create Export Package",
+        )
+
+        layout.prop(context.scene, "is_lod")
+
+        if context.scene.is_lod:
+            layout.prop(
+                context.scene,
+                "lod_number",
+            )
 
 
-class EXPORTERTOOL_PT_main_settings(bpy.types.Panel):
-    bl_idname = "EXPORTERTOOL_PT.main_settings"
+
+
+
+class EXPORTER_PT_main_settings(bpy.types.Panel):
+    bl_idname = "exporter.main_settings"
     bl_label = "Main Settings"
 
     bl_space_type = "VIEW_3D"

@@ -44,6 +44,11 @@ def register():
 
 
 def unregister():
+    properties_unregister()
+    operator_unregister()
+    ui_unregister()
+    suffixer_unregister()
+    config_tools_unregister()
     return None
 
 
