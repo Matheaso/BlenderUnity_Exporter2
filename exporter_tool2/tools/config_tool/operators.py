@@ -205,7 +205,7 @@ class EXPORTER_OT_rule_remove(bpy.types.Operator):
 
 def scene_to_config(scene) -> ExporterConfigData:
     return ExporterConfigData(
-        project_dir=ROOT_DIR,
+        project_dir=scene.exporter_project_dir,
 
         asset_types=tuple(
             AssetTypeData(
@@ -227,6 +227,8 @@ def scene_to_config(scene) -> ExporterConfigData:
 
 def config_to_scene(scene, config: ExporterConfigData) -> None:
     scene.exporter_asset_types.clear()
+
+    scene.exporter_project_dir = str(config.project_dir)
 
     for asset_data in config.asset_types:
         item = scene.exporter_asset_types.add()
