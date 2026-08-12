@@ -65,6 +65,12 @@ class EXPORTER_PT_asset_types(bpy.types.Panel):
         layout = self.layout
         scene = context.scene
 
+        layout.prop(
+            scene,
+            "exporter_project_dir",
+            text="Project Path",
+        )
+
         # Asset Types list
         row = layout.row()
 
