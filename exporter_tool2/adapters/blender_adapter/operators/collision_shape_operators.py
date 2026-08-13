@@ -1,63 +1,73 @@
 import bpy
 
-class EXPORTER_OT_create_box_shape(bpy.types.Operator):
-    bl_idname = "exporter.create_box_collision_shape"
-    bl_label = "Box"
+from exporter_tool2.core.object_data import ObjectData
+from exporter_tool2.core.types import ObjectType
+from exporter_tool2.core.result import Result
+from exporter_tool2.core.tools.collision import CollisionService, CollisionShape
+from exporter_tool2.adapters.blender_adapter.logging.bl_result import handle_result
+from exporter_tool2.core.object_data import ExportContext
+
+#TODO: Needs more attention, those conversions are not looking good
+class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
+    bl_idname = "exporter.create_collision_shape"
+    bl_label = "Collision"
     bl_options = {'REGISTER', 'UNDO'}
 
-    def execute(self, context):
-        self.report({'INFO'}, "Create Box Operator")
-
-        #TODO: Temp only, one object at the time
-        obj = context.active_object
-
-        export_package_collection = find_export_package(obj)
-        if export_package_collection is None:
-            self.report({'ERROR'}, "Export package not found")
-            return {"CANCELLED"}
-
-        bpy.ops.mesh.primitive_cube_add()
-        cube = context.active_object
-
-        setup_shape(obj, cube)
-
-        for collection in list(cube.users_collection):
-            collection.objects.unlink(cube)
-
-        collision_collection = export_package_collection.children.get("Collision")
-        collision_collection.objects.link(cube)
-
-        return {"FINISHED"}
-
-
-class EXPORTER_OT_create_sphere_shape(bpy.types.Operator):
-    bl_idname = "exporter.create_sphere_collision_shape"
-    bl_label = "Sphere"
-    bl_options = {'REGISTER', 'UNDO'}
+    shape_type: bpy.props.StringProperty()
 
     def execute(self, context):
-        self.report({'INFO'}, "Create Box Operator")
+        self.report({'INFO'}, f"Create Collision Operator: {self.shape_type}")
 
-        #TODO: Temp only, one object at the time
+        # TODO: Temp only, one object at the time
         obj = context.active_object
-
         export_package_collection = find_export_package(obj)
+
         if export_package_collection is None:
-            self.report({'ERROR'}, "Export package not found")
-            return {"CANCELLED"}
-
-        bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=3)
-        sphere = context.active_object
-
-        setup_shape(obj, sphere)
-
-        for collection in list(sphere.users_collection):
-            collection.objects.unlink(sphere)
+            return handle_result(self, Result.error("Export package not found"))
 
         collision_collection = export_package_collection.children.get("Collision")
-        collision_collection.objects.link(sphere)
 
-        return {"FINISHED"}
+        col_objs = tuple(
+            ObjectData(
+                asset_name=col_obj.name,
+                asset_type=ObjectType(col_obj.type),
+                pivot_location=col_obj.location,
+                scale=col_obj.scale,
+            )
+            for col_obj in collision_collection.objects
+        )
+
+        export_context = ExportContext(
+            tuple(col_objs),
+            obj.name
+        )
+        shape = CollisionShape(self.shape_type)
+        col_data = CollisionService.create_collision_shape(shape, export_context)
+
+        if not col_data.success:
+            return handle_result(self, col_data)
+
+        if col_data.data.shape == CollisionShape.Cube:
+            bpy.ops.mesh.primitive_cube_add()
+        elif col_data.data.shape == CollisionShape.Sphere:
+            bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=3)
+        elif col_data.data.shape== CollisionShape.Sphere:
+            return handle_result(self, Result.warning("Not implemented"))
+        elif col_data.data.shape == CollisionShape.Convex:
+            return handle_result(self, Result.warning("Not implemented"))
+        else:
+            return handle_result(self, Result.error("Collision shape not supported"))
+
+        shape = context.active_object
+
+        setup_shape(obj, shape, col_data.data.collision_name)
+
+        for collection in list(shape.users_collection):
+            collection.objects.unlink(shape)
+
+        collision_collection.objects.link(shape)
+
+        return handle_result(self, Result.ok(""))
 
 
 def find_export_package(obj):
@@ -87,13 +97,8 @@ def find_parent_collection(child_collection):
     return None
 
 
-def setup_shape(obj, shape):
-    shape_name = shape.name
-    if shape_name == ("Icosphere"):
-        shape_name = "Sphere"
-
-    base_name = f"COL_{shape_name}"
-    shape.name = get_unique_name(base_name)
+def setup_shape(obj, shape, shape_name):
+    shape.name = shape_name
     shape.location = obj.location
     shape.rotation_euler = obj.rotation_euler
     shape.scale = obj.scale

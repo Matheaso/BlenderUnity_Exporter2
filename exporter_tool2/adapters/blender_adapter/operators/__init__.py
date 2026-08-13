@@ -1,14 +1,15 @@
 import bpy
 
-from .collision_shape_operators import EXPORTER_OT_create_box_shape, EXPORTER_OT_create_sphere_shape
+from .collision_shape_operators import (
+    EXPORTER_OT_create_collision_shape
+)
 from .create_export_package import EXPORTER_OT_CreateExportPackage
 from .export_operator import  EXPORTER_OT_exporter
 
 CLASSES = (
     EXPORTER_OT_exporter,
     EXPORTER_OT_CreateExportPackage,
-    EXPORTER_OT_create_box_shape,
-    EXPORTER_OT_create_sphere_shape,
+    EXPORTER_OT_create_collision_shape
 )
 
 def register():

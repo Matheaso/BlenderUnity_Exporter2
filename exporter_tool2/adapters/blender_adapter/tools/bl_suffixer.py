@@ -1,8 +1,8 @@
 import bpy
 
 from ..logging.bl_result import handle_result
-from ....core.object_data import create_export_context
-from ....core.tools.suffixer import Suffixer
+from exporter_tool2.core.tools.suffixer import Suffixer
+from exporter_tool2.adapters.blender_adapter.object_helpers import create_export_context
 
 
 class SUFFIXER_OT_suffix(bpy.types.Operator):

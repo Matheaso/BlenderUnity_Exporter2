@@ -1,10 +1,10 @@
 import bpy
 
 from exporter_tool2.adapters.blender_adapter.operators.collision_shape_operators import (
-    EXPORTER_OT_create_sphere_shape
+    EXPORTER_OT_create_collision_shape
 )
 from exporter_tool2.adapters.blender_adapter.operators import (
-    EXPORTER_OT_create_box_shape, EXPORTER_OT_CreateExportPackage
+    EXPORTER_OT_CreateExportPackage
 )
 from exporter_tool2.adapters.blender_adapter.tools.bl_suffixer import (
     SUFFIXER_OT_prefix, SUFFIXER_OT_replace, SUFFIXER_OT_suffix, SUFFIXER_OT_auto
@@ -60,18 +60,34 @@ class EXPORTER_PT_Temp(bpy.types.Panel):
         if context.scene.is_collision:
             layout.label(text="Create Collision Shape")
             collision_row = layout.row(align=True)
+            collision_row_2 = layout.row(align=True)
 
-            collision_row.operator(
-                EXPORTER_OT_create_box_shape.bl_idname,
+            op = collision_row.operator(
+                EXPORTER_OT_create_collision_shape.bl_idname,
                 icon="CUBE",
                 text="Cube",
             )
+            op.shape_type = "CUBE"
 
-            collision_row.operator(
-                EXPORTER_OT_create_sphere_shape.bl_idname,
+            op = collision_row.operator(
+                EXPORTER_OT_create_collision_shape.bl_idname,
                 icon="SPHERE",
                 text="Sphere",
             )
+            op.shape_type = "SPHERE"
+
+            op = collision_row_2.operator(
+                EXPORTER_OT_create_collision_shape.bl_idname,
+                text="Capsule",
+            )
+            op.shape_type = "CAPSULE"
+
+            op = collision_row_2.operator(
+                EXPORTER_OT_create_collision_shape.bl_idname,
+                text="Convex",
+            )
+            op.shape_type = "CONVEX"
+
 
 
 
