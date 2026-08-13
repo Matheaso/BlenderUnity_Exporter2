@@ -18,6 +18,8 @@ def register():
 
     bpy.types.Scene.is_lod = BoolProperty(default=True)
 
+    bpy.types.Scene.is_collision = BoolProperty(default=True)
+
 
 def unregister():
     del bpy.types.Scene.export_settings

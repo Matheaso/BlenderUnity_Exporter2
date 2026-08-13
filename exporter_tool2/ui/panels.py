@@ -1,5 +1,7 @@
 import bpy
 
+from ..operators.collision_shape_operators import EXPORTER_OT_create_sphere_shape
+from ..operators import EXPORTER_OT_create_box_shape
 from ..operators import EXPORTER_OT_CreateExportPackage
 from ..tools.suffixer import SUFFIXER_OT_prefix, SUFFIXER_OT_replace, SUFFIXER_OT_suffix, SUFFIXER_OT_auto
 from ..operators.export_operator import EXPORTER_OT_exporter
@@ -38,7 +40,9 @@ class EXPORTER_PT_Temp(bpy.types.Panel):
             text="Create Export Package",
         )
 
-        layout.prop(context.scene, "is_lod")
+        bool_row = layout.row(align=True)
+        bool_row.prop(context.scene, "is_lod")
+        bool_row.prop(context.scene, "is_collision")
 
         if context.scene.is_lod:
             layout.prop(
@@ -46,7 +50,21 @@ class EXPORTER_PT_Temp(bpy.types.Panel):
                 "lod_number",
             )
 
+        if context.scene.is_collision:
+            layout.label(text="Create Collision Shape")
+            collision_row = layout.row(align=True)
 
+            collision_row.operator(
+                EXPORTER_OT_create_box_shape.bl_idname,
+                icon="CUBE",
+                text="Cube",
+            )
+
+            collision_row.operator(
+                EXPORTER_OT_create_sphere_shape.bl_idname,
+                icon="SPHERE",
+                text="Sphere",
+            )
 
 
 
