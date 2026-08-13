@@ -1,12 +1,12 @@
 import bpy
 
-from ....core.config_data import ExporterConfigData
-from ....validation.logging.validation_reporting import ValidationReport
-from ....adapters.blender_adapter.logging.blender_report import BlenderValidationReporter
-from ....core.config_data import AssetTypeData
-from ....core.serialization import load_config
-from ....validation.rule_registry import get_rule_class
-from ....core.object_data import create_export_context
+from exporter_tool2.core.config_data import ExporterConfigData
+from exporter_tool2.core.serialization import load_config
+from exporter_tool2.core.config_data import AssetTypeData
+from exporter_tool2.core.object_data import create_export_context
+from exporter_tool2.validation.logging.validation_reporting import ValidationReport
+from exporter_tool2.validation.rule_registry import get_rule_class
+from exporter_tool2.adapters.blender_adapter.logging.blender_report import BlenderValidationReporter
 
 
 class EXPORTER_OT_exporter(bpy.types.Operator):

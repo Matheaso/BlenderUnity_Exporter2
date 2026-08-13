@@ -1,5 +1,5 @@
 import bpy
-from .....validation.rule_registry import RULE_REGISTRY
+from exporter_tool2.validation.rule_registry import RULE_REGISTRY
 
 class EXPORTER_UL_asset_types(bpy.types.UIList):
 
