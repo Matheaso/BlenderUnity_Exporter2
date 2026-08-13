@@ -10,9 +10,34 @@ class Severity(Enum):
 
 T = TypeVar("T")
 
-@dataclass
+@dataclass(frozen=True)
 class Result(Generic[T]):
     success: bool
     severity: Severity = Severity.INFO
     message: str = ""
     data: T | None = None
+
+    @staticmethod
+    def ok(data: T | None = None, message: str = ""):
+        return Result(
+            success=True,
+            severity=Severity.INFO,
+            message=message,
+            data=data
+        )
+
+    @staticmethod
+    def error(message: str):
+        return Result(
+            success=False,
+            severity=Severity.ERROR,
+            message=message,
+        )
+
+    @staticmethod
+    def warning(message: str):
+        return Result(
+            success=False,
+            severity=Severity.WARNING,
+            message=message,
+        )
