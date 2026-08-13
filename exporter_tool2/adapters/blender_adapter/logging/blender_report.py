@@ -1,6 +1,6 @@
 import bpy
 
-from .validation_reporting import ValidationSeverity, ValidationReport
+from ....validation.logging.validation_reporting import ValidationSeverity, ValidationReport
 
 class BlenderValidationReporter:
 

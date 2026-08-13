@@ -7,7 +7,8 @@ from bpy.props import (
     StringProperty,
 )
 
-from ...core.serialization import load_config
+#TODO: Need to do smth with this imports
+from .....core.serialization import load_config
 
 from .properties import (
     ExporterAssetTypeProperties,

@@ -7,7 +7,7 @@ from bpy.props import (
     EnumProperty,
 )
 
-from ...validation.rule_registry import RULE_REGISTRY
+from .....validation.rule_registry import RULE_REGISTRY
 
 
 def rule_enum_items(self, context):

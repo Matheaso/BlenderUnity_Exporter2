@@ -1,20 +1,20 @@
 import bpy
 from dataclasses import dataclass
 
+from ..core.types import ObjectType
 
 float3 = tuple[float, float, float]
 
 @dataclass(frozen=True)
 class ObjectData:
     asset_name: str
-    asset_type: str
-
+    asset_type: ObjectType
     pivot_location: float3
     scale: float3
 
     @property
     def is_mesh(self) -> bool:
-        return self.asset_type == "MESH"
+        return self.asset_type == ObjectType.MESH
 
     @property
     def is_pivot_zeroed(self) -> bool:
@@ -40,6 +40,10 @@ class ExportContext:
                 result.append(obj)
 
         return tuple(result)
+
+    @property
+    def is_empty(self) -> bool:
+        return len(self.objects) == 0
 
 
 def create_export_context(blender_context: bpy.types.Context) -> ExportContext:

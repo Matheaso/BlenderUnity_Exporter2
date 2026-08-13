@@ -1,10 +1,10 @@
 import bpy
 
-from ..operators.collision_shape_operators import EXPORTER_OT_create_sphere_shape
-from ..operators import EXPORTER_OT_create_box_shape
-from ..operators import EXPORTER_OT_CreateExportPackage
-from ..tools.suffixer import SUFFIXER_OT_prefix, SUFFIXER_OT_replace, SUFFIXER_OT_suffix, SUFFIXER_OT_auto
-from ..operators.export_operator import EXPORTER_OT_exporter
+from ....adapters.blender_adapter.operators.collision_shape_operators import EXPORTER_OT_create_sphere_shape
+from ....adapters.blender_adapter.operators import EXPORTER_OT_create_box_shape
+from ....adapters.blender_adapter.operators import EXPORTER_OT_CreateExportPackage
+from ....adapters.blender_adapter.tools.bl_suffixer import SUFFIXER_OT_prefix, SUFFIXER_OT_replace, SUFFIXER_OT_suffix, SUFFIXER_OT_auto
+from ....adapters.blender_adapter.operators.export_operator import EXPORTER_OT_exporter
 
 
 class EXPORTER_PT_sidebar(bpy.types.Panel):

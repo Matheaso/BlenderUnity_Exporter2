@@ -1,10 +1,17 @@
-> INFO: **Work In Progress...**
+> INFO: **Work In Progress...**  
+> repository title is temporal
 
-# Blender to Unity Exporter with validation
 
+
+# DCC-Agnostic Asset Pipeline Tool "EVA" 
+#### EXPORTER • VALIDATION • AUTOMATION
+
+---
 Created by **Maciej "Matheas" Sojka**
 
+
 ## Features
+- DCC Agnostic (wip)
 - Easy configuration of new Asset Types and validation rules
 - Modular validation system
 - UI separated from logic
@@ -14,7 +21,26 @@ Created by **Maciej "Matheas" Sojka**
 - Per-Asset-Type rule assignment
 - Rule registry for dynamic validation lookup
 
-#### Work in progress
+🔴 Not Started  
+🟡 In progress  
+🟢 Ready  
+
+### DCC-Agnostic Exporter readiness:
+- 🟢 Suffixer
+- 🟢 Rules
+- 🟢 Validation
+- 🔴 Export
+- 🔴 Collision
+- 🔴 LOD support
+- 🔴 Export Collection
+
+### Adapters:
+- 🟡 Blender
+- 🔴 Houdini
+- 🔴 Maya
+- [...]
+
+#### Work in progress:
 - 🟢 Dynamic Project Path  
 - 🟡 LOD support  
   - 🔴 Optional LOD ranges

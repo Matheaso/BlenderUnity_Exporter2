@@ -3,13 +3,15 @@ from bpy.props import EnumProperty
 
 from .properties import rule_enum_items
 
-from ...core.serialization import (
+#TODO: Need to do smth with this imports
+from .....core.serialization import (
     ROOT_DIR,
     save_config,
     load_config
 )
 
-from ...core.config_data import (
+#TODO: Need to do smth with this imports
+from .....core.config_data import (
     AssetTypeData,
     NamingConvention,
     ExporterConfigData)
