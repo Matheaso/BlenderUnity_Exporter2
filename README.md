@@ -29,8 +29,8 @@ Created by **Maciej "Matheas" Sojka**
 - 🟢 Suffixer
 - 🟢 Rules
 - 🟢 Validation
+- 🟢 Collision
 - 🔴 Export
-- 🔴 Collision
 - 🔴 LOD support
 - 🔴 Export Collection
 
