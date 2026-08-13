@@ -23,8 +23,8 @@ class EXPORTER_OT_CreateExportPackage(bpy.types.Operator):
         lod_collection = bpy.data.collections.new("LOD")
         collection.children.link(lod_collection)
 
-        is_lod = bpy.types.Scene.is_lod
-        lod_num = bpy.types.Scene.lod_number
+        is_lod = context.scene.is_lod
+        lod_num = context.scene.lod_number
 
         if is_lod:
             for i in range(lod_num):
