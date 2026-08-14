@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from ..result import Result, Severity
 from ..serialization import load_config
-from ...core.object_data import ExportContext
+from ...core.object_data import AssetPackage
 
 
 @dataclass(frozen=True)
@@ -13,7 +13,7 @@ class RenameOperation:
 class Suffixer:
 
     @staticmethod
-    def run_suffix(export_context: ExportContext, suffix: str) -> Result[list[RenameOperation]]:
+    def run_suffix(export_context: AssetPackage, suffix: str) -> Result[list[RenameOperation]]:
 
         rename_operations: list[RenameOperation] = []
 
@@ -51,7 +51,7 @@ class Suffixer:
         )
 
     @staticmethod
-    def run_prefix(export_context: ExportContext, prefix: str) -> Result[list[RenameOperation]]:
+    def run_prefix(export_context: AssetPackage, prefix: str) -> Result[list[RenameOperation]]:
 
         rename_operations: list[RenameOperation] = []
 
@@ -89,7 +89,7 @@ class Suffixer:
         )
 
     @staticmethod
-    def run_replace(export_context: ExportContext, old: str, new: str) -> Result[list[RenameOperation]]:
+    def run_replace(export_context: AssetPackage, old: str, new: str) -> Result[list[RenameOperation]]:
 
         rename_operations: list[RenameOperation] = []
 
@@ -121,7 +121,7 @@ class Suffixer:
         )
 
     @staticmethod
-    def run_auto(export_context: ExportContext, asset_type: str) -> Result[list[RenameOperation]]:
+    def run_auto(export_context: AssetPackage, asset_type: str) -> Result[list[RenameOperation]]:
 
         rename_operations: list[RenameOperation] = []
 

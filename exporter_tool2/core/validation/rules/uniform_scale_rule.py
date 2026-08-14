@@ -1,6 +1,10 @@
-from ..logging.validation_reporting import ValidationReport, ValidationIssue, ValidationSeverity
-from ...core.config_data import AssetTypeData
-from ...core.object_data import ExportContext
+from ..logging.validation_reporting import (
+    ValidationReport,
+    ValidationIssue,
+    ValidationSeverity
+)
+from ...config_data import AssetTypeData
+from ...object_data import AssetPackage
 from ...validation.rule_interface import IValidationRule
 
 class UniformScale(IValidationRule):
@@ -12,7 +16,7 @@ class UniformScale(IValidationRule):
 
     def validate(
             self,
-            export_context: ExportContext,
+            export_context: AssetPackage,
             asset_type_data: AssetTypeData
     ) -> ValidationReport:
         issues = []

@@ -1,25 +1,25 @@
 import bpy
 
-from exporter_tool2.core.types import ObjectType
-from exporter_tool2.core.object_data import ExportContext, ObjectData
 from exporter_tool2.config.helpers import get_asset_types
+from exporter_tool2.core.types import ObjectType
+from exporter_tool2.core.object_data import AssetPackage, AssetData
 
 
 def get_blender_asset_types(self, context):
     return get_asset_types()
 
 
-def create_export_context(blender_context: bpy.types.Context) -> ExportContext:
+def create_export_context(blender_context: bpy.types.Context) -> AssetPackage:
     objects = []
     for obj in blender_context.selected_objects:
-        data = ObjectData(
+        data = AssetData(
             asset_name=obj.name,
             asset_type=ObjectType(obj.type),
             pivot_location=tuple(obj.location),
             scale=tuple(obj.scale),
         )
         objects.append(data)
-    return ExportContext(tuple(objects), blender_context.active_object.name)
+    return AssetPackage(tuple(objects), blender_context.active_object.name)
 
 
 def find_export_package_from_selection():

@@ -6,7 +6,7 @@ from ..core.types import ObjectType
 float3 = tuple[float, float, float]
 
 @dataclass(frozen=True)
-class ObjectData:
+class AssetData:
     asset_name: str
     asset_type: ObjectType
     pivot_location: float3
@@ -25,13 +25,14 @@ class ObjectData:
         return self.scale == (1.0, 1.0, 1.0)
 
 
+
 @dataclass(frozen=True)
-class ExportContext:
-    objects: tuple[ObjectData, ...]
+class AssetPackage:
+    objects: tuple[AssetData, ...]
     active_object_name: str
 
     @property
-    def mesh_objects(self) -> tuple[ObjectData, ...]:
+    def mesh_objects(self) -> tuple[AssetData, ...]:
 
         result = []
         for obj in self.objects:
@@ -43,5 +44,4 @@ class ExportContext:
     @property
     def is_empty(self) -> bool:
         return len(self.objects) == 0
-
 

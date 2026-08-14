@@ -4,10 +4,9 @@ from bpy.props import (
     StringProperty,
     CollectionProperty,
     IntProperty,
-    EnumProperty,
 )
 
-from exporter_tool2.validation.rule_registry import RULE_REGISTRY
+from exporter_tool2.core.validation.rule_registry import RULE_REGISTRY
 
 
 def rule_enum_items(self, context):

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum
 
-from ..object_data import ObjectData, ExportContext
+from ..object_data import AssetData, AssetPackage
 from ...core.result import Result
 
 
@@ -24,7 +24,7 @@ class CollisionService:
             shape: CollisionShape,
 
             # active object = name, rest are other colliders
-            export_context: ExportContext,
+            export_context: AssetPackage,
     ) -> Result[CreateCollisionShape]:
 
         if export_context.active_object_name is None:

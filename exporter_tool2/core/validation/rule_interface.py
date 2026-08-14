@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 from typing import ClassVar
 
 from .logging.validation_reporting import ValidationReport
-from ..core.config_data import AssetTypeData
-from ..core.object_data import ExportContext
+from ..config_data import AssetTypeData
+from ..object_data import AssetPackage
 
 
 class IValidationRule(ABC):
@@ -14,7 +14,7 @@ class IValidationRule(ABC):
     @abstractmethod
     def validate(
             self,
-            export_context: ExportContext,
+            export_context: AssetPackage,
             asset_type_data: AssetTypeData,
     )-> ValidationReport:
         issues = []

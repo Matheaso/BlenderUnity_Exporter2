@@ -1,7 +1,7 @@
-from ...core.config_data import AssetTypeData
-from ...core.object_data import ExportContext
-from ...validation.rule_interface import IValidationRule
-from ...validation.logging.validation_reporting import (
+from ...config_data import AssetTypeData
+from ...object_data import AssetPackage
+from ..rule_interface import IValidationRule
+from ..logging.validation_reporting import (
     ValidationIssue,
     ValidationReport,
 )
@@ -13,7 +13,7 @@ class NameRule(IValidationRule):
 
     def validate(
         self,
-        export_context: ExportContext,
+        export_context: AssetPackage,
         asset_type_data: AssetTypeData,
     ) -> ValidationReport:
 

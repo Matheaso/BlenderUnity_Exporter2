@@ -16,14 +16,14 @@ class EXPORTER_OT_collision_module_switch(bpy.types.Operator):
     bl_label = "Export Selected Collision Module"
 
     def execute(self, context):
-        export_collection = find_export_package_from_selection(context)
+        export_collection = find_export_package_from_selection()
         if not export_collection:
             return {'CANCELLED'}
 
         context.scene.is_collision = not context.scene.is_collision
 
         if context.scene.is_collision:
-            if not is_col_exist(context, "Collision"):
+            if not is_col_exist("Collision"):
                 collision_collection = bpy.data.collections.new("Collision")
                 collision_collection.color_tag = "COLOR_03"
                 export_collection.children.link(collision_collection)
@@ -36,41 +36,17 @@ class EXPORTER_OT_lod_module_switch(bpy.types.Operator):
     bl_label = "Export Selected LOD Module"
 
     def execute(self, context):
-        export_collection = OPHelper.find_export_package_from_selection(context)
+        export_collection = find_export_package_from_selection()
         if not export_collection:
             return {'CANCELLED'}
 
         context.scene.is_lod = not context.scene.is_lod
 
         if context.scene.is_lod:
-            if not OPHelper.is_col_exist(context, "LOD"):
+            if not is_col_exist("LOD"):
                 lod_collection = bpy.data.collections.new("LOD")
                 lod_collection.color_tag = "COLOR_03"
                 export_collection.children.link(lod_collection)
 
         return {'FINISHED'}
 
-
-# def find_export_package_from_selection(context):
-#     selection = bpy.context.active_object
-#
-#     for col in selection.users_collection:
-#         if col.name.startswith("EP_"):
-#             return col
-#
-#     return None
-#
-# def is_col_exist(context, col_name: str):
-#     selection = bpy.context.active_object
-#     export_package = None
-#
-#     for col in selection.users_collection:
-#         if col.name.startswith("EP_"):
-#             export_package = col
-#
-#     if export_package:
-#         for col in selection.users_collection:
-#             if col.name == col_name:
-#                 return True
-#     else:
-#         return False

@@ -1,11 +1,11 @@
 import bpy
 
-from exporter_tool2.core.object_data import ObjectData
+from exporter_tool2.core.object_data import AssetData
 from exporter_tool2.core.types import ObjectType
 from exporter_tool2.core.result import Result
 from exporter_tool2.core.tools.collision import CollisionService, CollisionShape
 from exporter_tool2.adapters.blender_adapter.logging.bl_result import handle_result
-from exporter_tool2.core.object_data import ExportContext
+from exporter_tool2.core.object_data import AssetPackage
 
 #TODO: Needs more attention, those conversions are not looking good
 class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
@@ -28,7 +28,7 @@ class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
         collision_collection = root_collection.children.get("Collision")
 
         col_objs = tuple(
-            ObjectData(
+            AssetData(
                 asset_name=col_obj.name,
                 asset_type=ObjectType(col_obj.type),
                 pivot_location=col_obj.location,
@@ -37,7 +37,7 @@ class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
             for col_obj in collision_collection.objects
         )
 
-        export_context = ExportContext(
+        export_context = AssetPackage(
             tuple(col_objs),
             obj.name
         )
