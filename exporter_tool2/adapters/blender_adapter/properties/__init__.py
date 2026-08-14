@@ -16,9 +16,9 @@ def register():
 
     bpy.types.Scene.lod_number = IntProperty(default=3, min=0, soft_max=7)
 
-    bpy.types.Scene.is_lod = BoolProperty(default=True)
+    bpy.types.Scene.is_lod = BoolProperty(default=False)
 
-    bpy.types.Scene.is_collision = BoolProperty(default=True)
+    bpy.types.Scene.is_collision = BoolProperty(default=False)
 
 
 def unregister():

@@ -2,7 +2,7 @@ import bpy
 
 from ..logging.bl_result import handle_result
 from exporter_tool2.core.tools.suffixer import Suffixer
-from exporter_tool2.adapters.blender_adapter.object_helpers import create_export_context
+from exporter_tool2.adapters.blender_adapter.helpers import
 
 
 class SUFFIXER_OT_suffix(bpy.types.Operator):

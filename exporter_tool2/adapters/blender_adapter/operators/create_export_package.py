@@ -20,10 +20,11 @@ class EXPORTER_OT_CreateExportPackage(bpy.types.Operator):
             return {'CANCELLED'}
 
         if isAlreadyInValidCollection(obj):
-            self.report({'ERROR'}, "Collection already exists")
+            self.report({'ERROR'}, "Selected object is already in Export Package")
             return {'CANCELLED'}
 
         collection = bpy.data.collections.new(f"EP_{obj.name}")
+        collection.color_tag = "COLOR_03"
         context.scene.collection.children.link(collection)
 
         for old_collection in list(obj.users_collection):
@@ -31,33 +32,8 @@ class EXPORTER_OT_CreateExportPackage(bpy.types.Operator):
                 old_collection.objects.unlink(obj)
 
         collection.objects.link(obj)
-        lod_collection = bpy.data.collections.new("LOD")
-        collection.children.link(lod_collection)
-
-
-        #TODO: This sections are temp, their place is in dynamic window with poll()
-
-        # LOD Section #
-        lod_num = context.scene.lod_number
-
-        if context.scene.is_lod:
-            for i in range(lod_num):
-                lod = obj.copy()
-                lod.name = f"LOD{str(i)}_" + obj.name
-                lod_collection.objects.link(lod)
-
-
-        # Collision Section #
-        collision_collection = bpy.data.collections.new("Collision")
-        collection.children.link(collision_collection)
-
-
 
         return {'FINISHED'}
-
-
-
-
 
 
 #TODO: LOD0 is the main object so no need obj without LOD. Collection is enough
@@ -67,7 +43,7 @@ class EXPORTER_OT_CreateExportPackage(bpy.types.Operator):
 
 def isAlreadyInValidCollection(obj) -> bool:
     for collection in obj.users_collection:
-        if collection.name == obj.name:
+        if collection.name.startswith("EP_"):
             return True
         else:
             return False

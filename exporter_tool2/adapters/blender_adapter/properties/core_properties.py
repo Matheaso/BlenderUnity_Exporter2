@@ -1,8 +1,8 @@
-import bpy
-from bpy.props import EnumProperty, PointerProperty
+from bpy.props import EnumProperty
 from bpy.types import PropertyGroup
 
-from .helper import get_blender_asset_types
+from adapters.blender_adapter.helpers import get_blender_asset_types
+
 
 class ExportSettings(PropertyGroup):
     asset_type: EnumProperty(
