@@ -20,12 +20,12 @@ class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
 
         # TODO: Temp only, one object at the time
         obj = context.active_object
-        export_package_collection = find_export_package(obj)
+        root_collection = find_export_package(obj)
 
-        if export_package_collection is None:
+        if root_collection is None:
             return handle_result(self, Result.error("Export package not found"))
 
-        collision_collection = export_package_collection.children.get("Collision")
+        collision_collection = root_collection.children.get("Collision")
 
         col_objs = tuple(
             ObjectData(
