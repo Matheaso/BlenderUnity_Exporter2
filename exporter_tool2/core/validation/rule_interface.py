@@ -3,7 +3,7 @@ from typing import ClassVar
 
 from .logging.validation_reporting import ValidationReport
 from ..config_data import AssetTypeData
-from ..object_data import AssetPackage
+from ..asset_data import AssetPackage
 
 
 class IValidationRule(ABC):

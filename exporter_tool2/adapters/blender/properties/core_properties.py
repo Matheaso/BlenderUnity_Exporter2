@@ -1,7 +1,7 @@
 from bpy.props import EnumProperty
 from bpy.types import PropertyGroup
 
-from exporter_tool2.adapters.blender_adapter.helpers import get_blender_asset_types
+from exporter_tool2.adapters.blender.helpers import get_blender_asset_types
 
 
 class ExportSettings(PropertyGroup):

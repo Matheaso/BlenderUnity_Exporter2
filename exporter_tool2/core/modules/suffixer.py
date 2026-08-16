@@ -2,13 +2,14 @@ from dataclasses import dataclass
 
 from ..result import Result, Severity
 from ..serialization import load_config
-from ...core.object_data import AssetPackage
+from ...core.asset_data import AssetPackage
 
 
 @dataclass(frozen=True)
 class RenameOperation:
     old_name: str
     new_name: str
+
 
 class Suffixer:
 
@@ -164,10 +165,3 @@ class Suffixer:
             "",
             rename_operations
         )
-
-
-
-
-
-
-

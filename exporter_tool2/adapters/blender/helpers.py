@@ -2,7 +2,7 @@ import bpy
 
 from exporter_tool2.config.helpers import get_asset_types
 from exporter_tool2.core.types import ObjectType
-from exporter_tool2.core.object_data import AssetPackage, AssetData
+from exporter_tool2.core.asset_data import AssetPackage, AssetData
 
 
 def get_blender_asset_types(self, context):

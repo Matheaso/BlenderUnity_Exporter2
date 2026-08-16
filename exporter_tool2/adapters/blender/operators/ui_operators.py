@@ -1,6 +1,6 @@
 import bpy
 
-from exporter_tool2.adapters.blender_adapter.helpers import (
+from exporter_tool2.adapters.blender.helpers import (
     find_export_package_from_selection,
     is_col_exist,
 

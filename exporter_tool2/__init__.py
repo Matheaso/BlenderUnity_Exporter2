@@ -1,21 +1,21 @@
-from .adapters.blender_adapter.operators import (
+from .adapters.blender.operators import (
     register as operator_registration,
     unregister as operator_unregister
 )
-from .adapters.blender_adapter.ui import (
+from .adapters.blender.ui import (
     register as ui_register,
     unregister as ui_unregister
 )
-from .adapters.blender_adapter.properties import (
+from .adapters.blender.properties import (
     register as properties_register,
     unregister as properties_unregister
 )
-from .adapters.blender_adapter.tools.bl_suffixer import (
+from .adapters.blender.tools.bl_suffixer import (
     register as suffixer_register,
     unregister as suffixer_unregister
 )
 
-from .adapters.blender_adapter.tools.config_tool import (
+from .adapters.blender.tools.config_tool import (
     register as config_tools_register,
     unregister as config_tools_unregister
 )

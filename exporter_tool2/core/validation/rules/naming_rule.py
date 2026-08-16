@@ -1,5 +1,5 @@
 from ...config_data import AssetTypeData
-from ...object_data import AssetPackage
+from ...asset_data import AssetPackage
 from ..rule_interface import IValidationRule
 from ..logging.validation_reporting import (
     ValidationIssue,

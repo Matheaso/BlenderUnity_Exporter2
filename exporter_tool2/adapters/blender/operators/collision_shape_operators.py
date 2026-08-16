@@ -1,11 +1,11 @@
 import bpy
 
-from exporter_tool2.core.object_data import AssetData
+from exporter_tool2.core.asset_data import AssetData
 from exporter_tool2.core.types import ObjectType
 from exporter_tool2.core.result import Result
-from exporter_tool2.core.tools.collision import CollisionService, CollisionShape
-from exporter_tool2.adapters.blender_adapter.logging.bl_result import handle_result
-from exporter_tool2.core.object_data import AssetPackage
+from exporter_tool2.core.modules.collision import CollisionService, CollisionShape
+from exporter_tool2.adapters.blender.logging.bl_result import handle_result
+from exporter_tool2.core.asset_data import AssetPackage
 
 #TODO: Needs more attention, those conversions are not looking good
 class EXPORTER_OT_create_collision_shape(bpy.types.Operator):

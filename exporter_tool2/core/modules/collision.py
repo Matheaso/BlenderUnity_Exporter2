@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum
 
-from ..object_data import AssetData, AssetPackage
+from ..asset_data import AssetPackage
 from ...core.result import Result
 
 
@@ -11,11 +11,13 @@ class CollisionShape(Enum):
     Capsule = "CAPSULE"
     Convex = "CONVEX"
 
+
 @dataclass(frozen=True)
 class CreateCollisionShape:
     shape: CollisionShape
     source_object_name: str
     collision_name: str
+
 
 class CollisionService:
 
@@ -26,7 +28,6 @@ class CollisionService:
             # active object = name, rest are other colliders
             export_context: AssetPackage,
     ) -> Result[CreateCollisionShape]:
-
         if export_context.active_object_name is None:
             return Result.error("No selection")
 
@@ -50,9 +51,10 @@ class CollisionService:
 
         return Result.ok(shape_data)
 
+
 def create_unique_name(
-    shape_name: str,
-    existing_names: tuple[str, ...],
+        shape_name: str,
+        existing_names: tuple[str, ...],
 ):
     index = 0
 
@@ -60,6 +62,3 @@ def create_unique_name(
         index += 1
 
     return f"{shape_name}_{index:02d}"
-
-
-

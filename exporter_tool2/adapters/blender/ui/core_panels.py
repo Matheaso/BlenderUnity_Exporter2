@@ -1,16 +1,16 @@
 import bpy
 
-from exporter_tool2.adapters.blender_adapter.operators import EXPORTER_OT_lod_module_switch, EXPORTER_OT_collision_module_switch
-from exporter_tool2.adapters.blender_adapter.operators.collision_shape_operators import (
+from exporter_tool2.adapters.blender.operators import EXPORTER_OT_lod_module_switch, EXPORTER_OT_collision_module_switch
+from exporter_tool2.adapters.blender.operators.collision_shape_operators import (
     EXPORTER_OT_create_collision_shape
 )
-from exporter_tool2.adapters.blender_adapter.operators import (
+from exporter_tool2.adapters.blender.operators import (
     EXPORTER_OT_CreateExportPackage
 )
-from exporter_tool2.adapters.blender_adapter.tools.bl_suffixer import (
+from exporter_tool2.adapters.blender.tools.bl_suffixer import (
     SUFFIXER_OT_prefix, SUFFIXER_OT_replace, SUFFIXER_OT_suffix, SUFFIXER_OT_auto
 )
-from exporter_tool2.adapters.blender_adapter.operators.export_operator import (
+from exporter_tool2.adapters.blender.operators.export_operator import (
     EXPORTER_OT_exporter
 )
 

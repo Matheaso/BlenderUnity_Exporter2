@@ -4,7 +4,7 @@ from ..logging.validation_reporting import (
     ValidationSeverity
 )
 from ...config_data import AssetTypeData
-from ...object_data import AssetPackage
+from ...asset_data import AssetPackage
 from ...validation.rule_interface import IValidationRule
 
 class UniformScale(IValidationRule):

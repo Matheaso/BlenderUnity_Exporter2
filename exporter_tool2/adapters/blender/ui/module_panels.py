@@ -1,10 +1,10 @@
 import bpy
 
-from exporter_tool2.adapters.blender_adapter.operators import (
+from exporter_tool2.adapters.blender.operators import (
     EXPORTER_OT_create_collision_shape,
     EXPORTER_OT_collision_module_switch
 )
-from exporter_tool2.adapters.blender_adapter.operators import (
+from exporter_tool2.adapters.blender.operators import (
     EXPORTER_OT_lod_module_switch
 )
 
