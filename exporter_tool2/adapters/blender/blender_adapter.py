@@ -1,12 +1,16 @@
+
 import bpy
 
-from core.adapter_interface import AdapterInterface
-from core.asset_data import AssetData, AssetPackage
-from core.result import Result
-from core.types import ObjectType
+from exporter_tool2.core.types import PackageObjectType
+from exporter_tool2.core.adapter_interface import AdapterInterface
+from exporter_tool2.core.asset_data import AssetData, AssetPackage
+from exporter_tool2.core.result import Result, Severity
+from exporter_tool2.core.types import ObjectType
 
 
 class BlenderAdapter(AdapterInterface):
+
+
 
     @staticmethod
     def create_asset_data(obj: bpy.types.Object) -> AssetData:
@@ -37,25 +41,42 @@ class BlenderAdapter(AdapterInterface):
         return AssetPackage(tuple(package))
 
     @staticmethod
-    def get_selected_asset() -> AssetData | None:
-        active_obj = bpy.context.active_object
-        if not active_obj:
-            return None
+    def get_selected_asset() -> Result[AssetData]:
+        selection = bpy.context.active_object
 
-        return BlenderAdapter.create_asset_data(
-            active_obj
-        )
+        if not selection:
+            return Result.error("Nothing selected")
+
+        asset_data = BlenderAdapter.create_asset_data(selection)
+
+        return Result.ok(asset_data)
 
     @staticmethod
-    def get_export_package_name_from_selection() -> str | None:
-        active_object = bpy.context.active_object
+    def get_selected_object() -> bpy.types.Object | None:
+        selection = bpy.context.active_object
 
-        if active_object is None:
+        if not selection:
             return None
 
-        for collection in active_object.users_collection:
+        return selection
+
+    @staticmethod
+    def get_export_package_from_selection(selection) -> bpy.types.Collection | None:
+
+        if selection is None:
+            return None
+
+        for collection in selection.users_collection:
             if collection.name.startswith("EP_"):
-                return collection.name
+                return collection
+
+        return None
+
+    @staticmethod
+    def get_module_from_root(root: bpy.types.Collection, type: PackageObjectType) -> bpy.types.Object | None:
+        for obj in root.objects:
+            if obj.name.startswith(type.value):
+                return obj
         return None
 
     @staticmethod
@@ -80,4 +101,8 @@ class BlenderAdapter(AdapterInterface):
 
     @staticmethod
     def create_export_package():
+        pass
+
+    @staticmethod
+    def find_module():
         pass

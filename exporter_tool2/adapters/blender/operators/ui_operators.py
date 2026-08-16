@@ -1,8 +1,10 @@
 import bpy
 
+from exporter_tool2.adapters.blender.blender_adapter import BlenderAdapter
+from exporter_tool2.core.types import PackageObjectType
 from exporter_tool2.adapters.blender.helpers import (
     find_export_package_from_selection,
-    is_col_exist,
+    is_col_exist
 
 )
 
@@ -23,10 +25,9 @@ class EXPORTER_OT_collision_module_switch(bpy.types.Operator):
         context.scene.is_collision = not context.scene.is_collision
 
         if context.scene.is_collision:
-            if not is_col_exist("Collision"):
-                collision_collection = bpy.data.collections.new("Collision")
-                collision_collection.color_tag = "COLOR_03"
-                export_collection.children.link(collision_collection)
+            if not BlenderAdapter.get_module_from_root(export_collection, PackageObjectType.COLLISION):
+                new_object = bpy.data.objects.new(PackageObjectType.COLLISION.value, None)
+                export_collection.objects.link(new_object)
 
         return {'FINISHED'}
 

@@ -1,7 +1,7 @@
 import bpy
 
 from exporter_tool2.config.helpers import get_asset_types
-from exporter_tool2.core.types import ObjectType
+from exporter_tool2.core.types import ObjectType, PackageObjectType
 from exporter_tool2.core.asset_data import AssetPackage, AssetData
 
 
@@ -44,3 +44,13 @@ def is_col_exist(col_name: str):
                     return True
         else:
             return False
+
+
+
+def find_module(context, prefix: PackageObjectType):
+    for col in bpy.context.active_object.users_collection:
+        if col.name.startswith("EP_"):
+            for obj in col.objects:
+                if obj.name.startswith(prefix.value):
+                    return obj
+    return None

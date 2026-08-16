@@ -15,7 +15,6 @@ class CollisionShape(Enum):
 @dataclass(frozen=True)
 class CreateCollisionShape:
     shape: CollisionShape
-    source_object_name: str
     collision_name: str
 
 
@@ -28,13 +27,9 @@ class CollisionService:
             # active object = name, rest are other colliders
             export_context: AssetPackage,
     ) -> Result[CreateCollisionShape]:
-        if export_context.active_object_name is None:
-            return Result.error("No selection")
-
-        obj_name = export_context.active_object_name
 
         existing_names = tuple(
-            obj.asset_name
+            obj.name
             for obj in export_context.objects
         )
 
@@ -45,7 +40,6 @@ class CollisionService:
 
         shape_data = CreateCollisionShape(
             shape=shape,
-            source_object_name=obj_name,
             collision_name=collision_name,
         )
 

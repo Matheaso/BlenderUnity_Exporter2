@@ -1,7 +1,8 @@
 import bpy
 
+from exporter_tool2.adapters.blender.blender_adapter import BlenderAdapter
 from exporter_tool2.core.asset_data import AssetData
-from exporter_tool2.core.types import ObjectType
+from exporter_tool2.core.types import ObjectType, PackageObjectType
 from exporter_tool2.core.result import Result
 from exporter_tool2.core.modules.collision import CollisionService, CollisionShape
 from exporter_tool2.adapters.blender.logging.bl_result import handle_result
@@ -19,27 +20,28 @@ class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
         self.report({'INFO'}, f"Create Collision Operator: {self.shape_type}")
 
         # TODO: Temp only, one object at the time
-        obj = context.active_object
-        root_collection = find_export_package(obj)
+        selection = BlenderAdapter.get_selected_object()
+        if not selection:
+            return handle_result(self, Result.error("No object selected"))
 
-        if root_collection is None:
-            return handle_result(self, Result.error("Export package not found"))
+        root_collection = BlenderAdapter.get_export_package_from_selection(selection)
 
-        collision_collection = root_collection.children.get("Collision")
+        if not root_collection:
+            return handle_result(self, Result.error("Couldn't find root collection"))
+
+        collision_module = root_collection.objects.get(PackageObjectType.COLLISION.value)
 
         col_objs = tuple(
             AssetData(
-                asset_name=col_obj.name,
-                asset_type=ObjectType(col_obj.type),
-                pivot_location=col_obj.location,
-                scale=col_obj.scale,
+                name=col_obj.name,
+                object_type=ObjectType(col_obj.type),
+                components=[]
             )
-            for col_obj in collision_collection.objects
+            for col_obj in collision_module.children
         )
 
         export_context = AssetPackage(
             tuple(col_objs),
-            obj.name
         )
         shape = CollisionShape(self.shape_type)
         col_data = CollisionService.create_collision_shape(shape, export_context)
@@ -51,7 +53,7 @@ class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
             bpy.ops.mesh.primitive_cube_add()
         elif col_data.data.shape == CollisionShape.Sphere:
             bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=3)
-        elif col_data.data.shape== CollisionShape.Sphere:
+        elif col_data.data.shape== CollisionShape.Capsule:
             return handle_result(self, Result.warning("Not implemented"))
         elif col_data.data.shape == CollisionShape.Convex:
             return handle_result(self, Result.warning("Not implemented"))
@@ -60,12 +62,17 @@ class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
 
         shape = context.active_object
 
-        setup_shape(obj, shape, col_data.data.collision_name)
+        setup_shape(selection, shape, col_data.data.collision_name)
 
         for collection in list(shape.users_collection):
             collection.objects.unlink(shape)
 
-        collision_collection.objects.link(shape)
+        root_collection.objects.link(shape)
+
+        module = BlenderAdapter.get_module_from_root(root_collection, PackageObjectType.COLLISION)
+        if not module:
+            return handle_result(self, Result.error(f"Couldn't find module: {PackageObjectType.COLLISION.value}"))
+        shape.parent = module
 
         return handle_result(self, Result.ok(""))
 

@@ -7,8 +7,8 @@ class ObjectType(Enum):
     OTHER = "OTHER"
 
 class PackageObjectType(Enum):
-    PACKAGE = 1
-    MODULE = 2
-    COLLISION = 3
-    LOD = 4
-    OCCLUDER = 5
+    PACKAGE = "PACKAGE"
+    MODULE = "MODULE"
+    COLLISION = "COLLISION"
+    LOD = "LOD"
+    OCCLUDER = "OCCLUDER"
