@@ -1,9 +1,7 @@
 import bpy
 
 from exporter_tool2.adapters.blender.operators import EXPORTER_OT_lod_module_switch, EXPORTER_OT_collision_module_switch
-from exporter_tool2.adapters.blender.operators.collision_shape_operators import (
-    EXPORTER_OT_create_collision_shape
-)
+
 from exporter_tool2.adapters.blender.operators import (
     EXPORTER_OT_CreateExportPackage
 )
@@ -16,7 +14,7 @@ from exporter_tool2.adapters.blender.operators.export_operator import (
 
 
 class EXPORTER_PT_sidebar(bpy.types.Panel):
-    bl_idname = "exporter.sidebar"
+    bl_idname = "EXPORTER_PT_Sidebar"
     bl_label = "EXPORT"
 
     bl_space_type = "VIEW_3D"
@@ -33,7 +31,7 @@ class EXPORTER_PT_sidebar(bpy.types.Panel):
 
 
 class EXPORTER_PT_Temp(bpy.types.Panel):
-    bl_idname = "exporter.temp"
+    bl_idname = "EXPORTER_PT_Temp"
     bl_label = "Export Package"
 
     bl_space_type = "VIEW_3D"
@@ -54,7 +52,6 @@ class EXPORTER_PT_Temp(bpy.types.Panel):
                 text="Enable LOD"
             )
 
-
         if not context.scene.is_collision:
             layout.operator(
                 EXPORTER_OT_collision_module_switch.bl_idname,
@@ -62,12 +59,8 @@ class EXPORTER_PT_Temp(bpy.types.Panel):
             )
 
 
-
-
-
-
 class EXPORTER_PT_main_settings(bpy.types.Panel):
-    bl_idname = "exporter.main_settings"
+    bl_idname = "EXPORTER_PT_Main_settings"
     bl_label = "Main Settings"
 
     bl_space_type = "VIEW_3D"
@@ -88,7 +81,7 @@ class EXPORTER_PT_main_settings(bpy.types.Panel):
 
 
 class SUFFIXER_PT_main_settings(bpy.types.Panel):
-    bl_idname = "suffixer.main_panel"
+    bl_idname = "EXPORTER_PT_Main_panel"
     bl_label = "Suffixer"
 
     bl_space_type = "VIEW_3D"
@@ -118,10 +111,3 @@ class SUFFIXER_PT_main_settings(bpy.types.Panel):
             SUFFIXER_OT_auto.bl_idname,
             text="Auto",
         )
-
-
-
-
-
-
-

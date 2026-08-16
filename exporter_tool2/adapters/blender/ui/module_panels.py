@@ -10,7 +10,7 @@ from exporter_tool2.adapters.blender.operators import (
 
 
 class EXPORTER_PT_lod_module(bpy.types.Panel):
-    bl_idname = "exporter.lod_module"
+    bl_idname = "EXPORTER_PT_Lod_module"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_label = "LOD"
@@ -38,8 +38,9 @@ class EXPORTER_PT_lod_module(bpy.types.Panel):
             text="Disable LOD"
         )
 
+
 class EXPORTER_PT_collision_module(bpy.types.Panel):
-    bl_idname = "exporter.collision_module"
+    bl_idname = "EXPORTER_PT_Collision_module"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_label = "Collision"
