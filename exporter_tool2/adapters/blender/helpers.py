@@ -13,13 +13,12 @@ def create_export_context(blender_context: bpy.types.Context) -> AssetPackage:
     objects = []
     for obj in blender_context.selected_objects:
         data = AssetData(
-            asset_name=obj.name,
-            asset_type=ObjectType(obj.type),
-            pivot_location=tuple(obj.location),
-            scale=tuple(obj.scale),
+            name=obj.name,
+            object_type=ObjectType(obj.type),
+            components=[]
         )
         objects.append(data)
-    return AssetPackage(tuple(objects), blender_context.active_object.name)
+    return AssetPackage(tuple(objects))
 
 
 def find_export_package_from_selection():

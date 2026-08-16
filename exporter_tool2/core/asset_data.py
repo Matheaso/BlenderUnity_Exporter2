@@ -9,6 +9,14 @@ float3 = tuple[float, float, float]
 T = TypeVar('T', bound=Component)
 
 
+# Not mutable AssetData type
+@dataclass(frozen=True)
+class AssetDataView:
+    name: str
+    object_type: ObjectType
+    components: tuple[Component, ...]
+
+@dataclass
 class AssetData:
     name: str
     object_type: ObjectType
@@ -47,18 +55,9 @@ class AssetData:
         return component
 
 
-# Not mutable AssetData type
-@dataclass(frozen=True)
-class AssetDataView:
-    name: str
-    object_type: ObjectType
-    components: tuple[Component, ...]
-
-
 @dataclass(frozen=True)
 class AssetPackage:
     objects: tuple[AssetData, ...]
-    active_object_name: str
 
     @property
     def mesh_objects(self) -> tuple[AssetData, ...]:

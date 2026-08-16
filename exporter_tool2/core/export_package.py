@@ -5,7 +5,6 @@ from core.types import PackageObjectType
 @dataclass(frozen=True)
 class PackageNode:
     name: str
-    root: str
     type: PackageObjectType
 
 @dataclass(frozen=True)
@@ -15,12 +14,9 @@ class ExportPackage:
 
     @property
     def get_object(self, name: str) -> PackageNode | None:
-
         for node in self.nodes:
             if node.name == name:
                 return node
         return None
-
-
 
 

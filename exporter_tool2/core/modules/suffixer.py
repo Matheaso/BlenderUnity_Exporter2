@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from ..result import Result, Severity
 from ..serialization import load_config
-from ...core.asset_data import AssetPackage
+from ...core.asset_data import AssetPackage, AssetData
 
 
 @dataclass(frozen=True)
@@ -14,11 +14,11 @@ class RenameOperation:
 class Suffixer:
 
     @staticmethod
-    def run_suffix(export_context: AssetPackage, suffix: str) -> Result[list[RenameOperation]]:
+    def run_suffix(asset_package: AssetPackage, suffix: str) -> Result[list[RenameOperation]]:
 
         rename_operations: list[RenameOperation] = []
 
-        if export_context.is_empty:
+        if asset_package:
             return Result(
                 False,
                 Severity.WARNING,
@@ -34,10 +34,10 @@ class Suffixer:
 
         suffix = suffix.replace("_", "")
 
-        for obj in export_context.objects:
-            old_name = obj.asset_name
+        for obj in asset_package.objects:
+            old_name = obj.name
 
-            new_name = obj.asset_name
+            new_name = obj.name
             if not new_name.endswith("_"):
                 new_name += "_"
             new_name += suffix
@@ -52,11 +52,11 @@ class Suffixer:
         )
 
     @staticmethod
-    def run_prefix(export_context: AssetPackage, prefix: str) -> Result[list[RenameOperation]]:
+    def run_prefix(asset_package: AssetPackage, prefix: str) -> Result[list[RenameOperation]]:
 
         rename_operations: list[RenameOperation] = []
 
-        if export_context.is_empty:
+        if asset_package:
             return Result(
                 False,
                 Severity.WARNING,
@@ -72,10 +72,10 @@ class Suffixer:
 
         prefix = prefix.replace("_", "")
 
-        for obj in export_context.objects:
-            old_name = obj.asset_name
+        for obj in asset_package.objects:
+            old_name = obj.name
 
-            new_name = obj.asset_name
+            new_name = obj.name
             if not new_name.startswith("_"):
                 new_name = "_" + new_name
             new_name = f"{prefix}{new_name}"
@@ -90,11 +90,11 @@ class Suffixer:
         )
 
     @staticmethod
-    def run_replace(export_context: AssetPackage, old: str, new: str) -> Result[list[RenameOperation]]:
+    def run_replace(asset_package: AssetPackage, old: str, new: str) -> Result[list[RenameOperation]]:
 
         rename_operations: list[RenameOperation] = []
 
-        if export_context.is_empty:
+        if asset_package:
             return Result(
                 False,
                 Severity.WARNING,
@@ -108,9 +108,9 @@ class Suffixer:
                 "No suffix selected"
             )
 
-        for obj in export_context.objects:
-            old_name = obj.asset_name
-            new_name = obj.asset_name.replace(old, new)
+        for obj in asset_package.objects:
+            old_name = obj.name
+            new_name = obj.name.replace(old, new)
 
             rename_operations.append(RenameOperation(old_name, new_name))
 
@@ -122,11 +122,11 @@ class Suffixer:
         )
 
     @staticmethod
-    def run_auto(export_context: AssetPackage, asset_type: str) -> Result[list[RenameOperation]]:
+    def run_auto(asset_package: AssetPackage, asset_type: str) -> Result[list[RenameOperation]]:
 
         rename_operations: list[RenameOperation] = []
 
-        if export_context.is_empty:
+        if not asset_package.objects:
             return Result(
                 False,
                 Severity.WARNING,
@@ -146,8 +146,8 @@ class Suffixer:
             if t.name_id == asset_type:
                 name_convention = t.naming_convention
 
-                for obj in export_context.objects:
-                    old_name = obj.asset_name
+                for obj in asset_package.objects:
+                    old_name = obj.name
                     new_name = name_convention.prefix + old_name + name_convention.suffix
                     rename_operations.append(RenameOperation(old_name, new_name))
                 break

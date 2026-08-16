@@ -23,8 +23,8 @@ class SUFFIXER_OT_suffix(bpy.types.Operator):
     def execute(self, context):
         self.report({'INFO'}, "Suffix Suffix")
 
-        export_context = create_export_context(context)
-        output = Suffixer.run_suffix(export_context, self.suffix)
+        asset_package = create_export_context(context)
+        output = Suffixer.run_suffix(asset_package, self.suffix)
 
         if not output.success:
             return handle_result(self, output)
