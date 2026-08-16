@@ -1,13 +1,6 @@
 from dataclasses import dataclass
-from enum import Enum
+from core.types import PackageObjectType
 
-
-class PackageObjectType(Enum):
-    PACKAGE = 1
-    MODULE = 2
-    COLLISION = 3
-    LOD = 4
-    OCCLUDER = 5
 
 @dataclass(frozen=True)
 class PackageNode:
