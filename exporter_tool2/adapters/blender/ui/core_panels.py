@@ -5,7 +5,7 @@ from exporter_tool2.adapters.blender.operators import EXPORTER_OT_lod_module_swi
 from exporter_tool2.adapters.blender.operators import (
     EXPORTER_OT_CreateExportPackage
 )
-from exporter_tool2.adapters.blender.tools.bl_suffixer import (
+from exporter_tool2.adapters.blender.modules.bl_suffixer import (
     SUFFIXER_OT_prefix, SUFFIXER_OT_replace, SUFFIXER_OT_suffix, SUFFIXER_OT_auto
 )
 from exporter_tool2.adapters.blender.operators.export_operator import (

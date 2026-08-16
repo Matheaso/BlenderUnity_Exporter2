@@ -10,12 +10,12 @@ from .adapters.blender.properties import (
     register as properties_register,
     unregister as properties_unregister
 )
-from .adapters.blender.tools.bl_suffixer import (
+from .adapters.blender.modules.bl_suffixer import (
     register as suffixer_register,
     unregister as suffixer_unregister
 )
 
-from .adapters.blender.tools.config_tool import (
+from .adapters.blender.modules.config_tool import (
     register as config_tools_register,
     unregister as config_tools_unregister
 )
