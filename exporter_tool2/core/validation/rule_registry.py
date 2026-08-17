@@ -1,9 +1,9 @@
 from .rules.naming_rule import NameRule
-from .rules.uniform_scale_rule import UniformScale
+from .rules.uniform_scale_rule import IdentityScale
 
 RULE_REGISTRY = {
     NameRule.rule_id: NameRule,
-    UniformScale.rule_id: UniformScale,
+    IdentityScale.rule_id: IdentityScale,
 }
 
 def get_rule_class(rule_id: str):
