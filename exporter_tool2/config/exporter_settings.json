@@ -8,9 +8,7 @@
                 "prefix": "SM_",
                 "suffix": ""
             },
-            "rule_id": [
-                "uniform_scale"
-            ],
+            "rule_id": [],
             "relative_path": "Assets/Graphics/Enviro"
         },
         {
@@ -20,9 +18,7 @@
                 "prefix": "SM_F_",
                 "suffix": ""
             },
-            "rule_id": [
-                "naming_rule"
-            ],
+            "rule_id": [],
             "relative_path": "Assets/Graphics/Foliage"
         },
         {

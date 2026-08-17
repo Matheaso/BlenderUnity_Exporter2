@@ -1,7 +1,6 @@
 from ..logging.validation_reporting import (
     ValidationReport,
     ValidationIssue,
-    ValidationSeverity
 )
 from ...components import Transform
 from ...config_data import AssetTypeData

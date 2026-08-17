@@ -10,6 +10,7 @@ from ..logging.validation_reporting import (
 class NameRule(IValidationRule):
     rule_id = "naming_rule"
     display_name = "Naming Convention"
+    description = "Naming convention"
 
     def validate(
         self,

@@ -1,7 +1,7 @@
 import bpy
 
 from exporter_tool2.core.components import Component
-from exporter_tool2.core.component_adapter_interface import ComponentAdapterInterface
+from exporter_tool2.core.adapter_interfaces.component_adapter_interface import ComponentAdapterInterface
 from exporter_tool2.core.components import Transform
 
 

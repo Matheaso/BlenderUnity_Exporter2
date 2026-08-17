@@ -2,9 +2,9 @@
 import bpy
 
 from exporter_tool2.core.types import PackageObjectType
-from exporter_tool2.core.adapter_interface import AdapterInterface
+from exporter_tool2.core.adapter_interfaces.adapter_interface import AdapterInterface
 from exporter_tool2.core.asset_data import AssetData, AssetPackage
-from exporter_tool2.core.result import Result, Severity
+from exporter_tool2.core.result import Result
 from exporter_tool2.core.types import ObjectType
 
 

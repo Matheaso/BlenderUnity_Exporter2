@@ -10,7 +10,7 @@ from ..asset_data import AssetPackage
 class IValidationRule(ABC):
     rule_id: ClassVar[str]
     display_name: ClassVar[str]
-    description: ClassVar[str]
+    description: ClassVar[str] = ""
 
     needed_components: ClassVar[tuple[type[Component], ...]] = ()
 
