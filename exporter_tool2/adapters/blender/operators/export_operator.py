@@ -23,7 +23,7 @@ class EXPORTER_OT_exporter(bpy.types.Operator):
             self.report({'ERROR'}, "No objects selected")
             return {'FINISHED'}
 
-        export_context = create_export_context(context)
+        asset_package = create_export_context(context)
         config = load_config()
         active_asset_type = get_active_asset_type(context, config)
 
@@ -31,7 +31,11 @@ class EXPORTER_OT_exporter(bpy.types.Operator):
             rule_class = get_rule_class(rule_id)
             rule = rule_class()
 
-            report = rule.validate(export_context, active_asset_type)
+            for component in rule_class.needed_components:
+                for asset in asset_package.objects:
+                    asset.get_or_create_component(component)
+
+            report = rule.validate(asset_package, active_asset_type)
             all_issues.extend(report.issues)
 
         validation_report = ValidationReport(

@@ -6,6 +6,7 @@ from .collision_shape_operators import (
 from .create_export_package import EXPORTER_OT_CreateExportPackage
 from .export_operator import  EXPORTER_OT_exporter
 from .ui_operators import EXPORTER_OT_collision_module_switch, EXPORTER_OT_lod_module_switch
+from .validate_operator import EXPORTER_OT_validation_test
 
 CLASSES = (
     EXPORTER_OT_exporter,
@@ -13,6 +14,7 @@ CLASSES = (
     EXPORTER_OT_create_collision_shape,
     EXPORTER_OT_collision_module_switch,
     EXPORTER_OT_lod_module_switch,
+    EXPORTER_OT_validation_test,
 )
 
 def register():

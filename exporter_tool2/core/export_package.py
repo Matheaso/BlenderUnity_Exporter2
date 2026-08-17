@@ -5,7 +5,8 @@ from core.types import PackageObjectType
 @dataclass(frozen=True)
 class PackageNode:
     name: str
-    type: PackageObjectType
+    parent: PackageObjectType
+
 
 @dataclass(frozen=True)
 class ExportPackage:

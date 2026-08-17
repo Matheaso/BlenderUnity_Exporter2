@@ -52,9 +52,7 @@ class BlenderAdapter(AdapterInterface):
         return Result.ok(asset_data)
 
     @staticmethod
-    def get_selected_object() -> bpy.types.Object | None:
-        selection = bpy.context.active_object
-
+    def get_selected_object(selection) -> bpy.types.Object | None:
         if not selection:
             return None
 

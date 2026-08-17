@@ -3,6 +3,7 @@ from ..logging.validation_reporting import (
     ValidationIssue,
     ValidationSeverity
 )
+from ...components import Transform
 from ...config_data import AssetTypeData
 from ...asset_data import AssetPackage
 from ...validation.rule_interface import IValidationRule
@@ -14,21 +15,41 @@ class UniformScale(IValidationRule):
                    "- Scale needs to be applied)\n"
                    )
 
+    needed_components = (Transform,)
+
     def validate(
             self,
-            export_context: AssetPackage,
+            asset_package: AssetPackage,
             asset_type_data: AssetTypeData
     ) -> ValidationReport:
         issues = []
 
-        for obj_data in export_context.objects:
-            if not obj_data.is_uniform_scale:
+        for obj_data in asset_package.objects:
+
+            transform = obj_data.get_component(Transform)
+
+            if transform is None:
                 issues.append(
                     ValidationIssue(
-                        f"{obj_data.asset_name}: Has non uniform scale. Apply scale to continue",
-                        ValidationSeverity.ERROR
+                        f"Asset without Transform component: {obj_data.name}",
+                        ValidationSeverity.ERROR,
                     )
                 )
+                continue
+            else:
+                issues.append(ValidationIssue(
+                    "WORKING: Transform is NOT null",
+                    ValidationSeverity.INFO,
+                ))
+
+            if not transform.is_scale_identity():
+                issues.append(
+                    ValidationIssue(
+                        f"{obj_data.name}: Has scale different than identity. Apply scale to continue.",
+                        ValidationSeverity.ERROR,
+                    )
+                )
+
         return ValidationReport(
             issues=tuple(issues)
         )

@@ -33,16 +33,17 @@ class AssetData:
         return self.object_type == ObjectType.MESH
 
     def add_component(self, component: T):
-        for component in self.components:
-            if isinstance(component, type(component)):
+        for existing_component in self.components:
+            if isinstance(existing_component, type(component)):
                 return
 
         self.components.append(component)
 
     def get_component(self, component_type: type[T]) -> T | None:
         for component in self.components:
-            if isinstance(component, type(component_type)):
+            if isinstance(component, component_type):
                 return component
+            
         return None
 
     # TODO: probably no need for this

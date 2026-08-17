@@ -30,7 +30,7 @@ class AdapterInterface(ABC):
 
     @staticmethod
     @abstractmethod
-    def get_selected_object():
+    def get_selected_object(selection):
         pass
 
     @staticmethod

@@ -1,6 +1,7 @@
 import bpy
 
-from exporter_tool2.adapters.blender.operators import EXPORTER_OT_lod_module_switch, EXPORTER_OT_collision_module_switch
+from exporter_tool2.adapters.blender.operators import EXPORTER_OT_lod_module_switch, \
+    EXPORTER_OT_collision_module_switch, EXPORTER_OT_validation_test
 
 from exporter_tool2.adapters.blender.operators import (
     EXPORTER_OT_CreateExportPackage
@@ -27,6 +28,11 @@ class EXPORTER_PT_sidebar(bpy.types.Panel):
         layout.operator(
             EXPORTER_OT_exporter.bl_idname,
             text="Export selected",
+        )
+
+        layout.operator(
+            EXPORTER_OT_validation_test.bl_idname,
+            text="[ Validation Test ]",
         )
 
 

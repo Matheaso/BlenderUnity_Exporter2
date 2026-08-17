@@ -13,7 +13,7 @@ class NameRule(IValidationRule):
 
     def validate(
         self,
-        export_context: AssetPackage,
+        asset_package: AssetPackage,
         asset_type_data: AssetTypeData,
     ) -> ValidationReport:
 
@@ -21,7 +21,7 @@ class NameRule(IValidationRule):
 
         naming = asset_type_data.naming_convention
 
-        for obj_context in export_context.objects:
+        for obj_context in asset_package.objects:
             if naming.prefix and not obj_context.asset_name.startswith(naming.prefix):
                 issues.append(
                     ValidationIssue.error(
