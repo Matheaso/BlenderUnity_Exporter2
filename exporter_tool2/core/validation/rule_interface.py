@@ -23,8 +23,8 @@ class IValidationRule(ABC):
     def _add_issue(self, issue: ValidationIssue):
         self.issues.append(issue)
 
-    def _return_report(self):
-        ValidationReport(
+    def _return_report(self) -> ValidationReport:
+        return ValidationReport(
             issues=tuple(self.issues),
         )
 

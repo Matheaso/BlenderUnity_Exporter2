@@ -2,7 +2,6 @@ import bpy
 
 from exporter_tool2.adapters.blender.blender_adapter import BlenderAdapter
 from exporter_tool2.adapters.blender.component_adapter import BlenderComponentAdapter
-from exporter_tool2.adapters.blender.helpers import create_export_context
 from exporter_tool2.adapters.blender.logging.blender_report import BlenderValidationReporter
 from exporter_tool2.adapters.blender.operators.export_operator import get_active_asset_type
 from exporter_tool2.core.serialization import load_config
@@ -20,7 +19,6 @@ class EXPORTER_OT_validation_test(bpy.types.Operator):
 
         all_issues = []
 
-
         selection = BlenderAdapter.get_selected_object(context.active_object)
         if not selection:
             self.report({'ERROR'}, "Select an object")
@@ -28,12 +26,11 @@ class EXPORTER_OT_validation_test(bpy.types.Operator):
         root = BlenderAdapter.get_export_package_from_selection(selection)
 
         if not root:
-            self.report({'ERROR'}, "Couln't find root object")
-
+            self.report({'ERROR'}, "Couldn't find root object")
 
         config = load_config()
         active_asset_type = get_active_asset_type(context, config)
-        asset_package = create_export_context(context)
+        asset_package = BlenderAdapter.create_export_package(context)
 
         for rule_id in active_asset_type.rule_id:
             rule_class = get_rule_class(rule_id)

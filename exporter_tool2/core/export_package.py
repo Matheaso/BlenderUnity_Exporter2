@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from core.types import PackageObjectType
+from exporter_tool2.core.types import PackageObjectType
 
 
 @dataclass(frozen=True)

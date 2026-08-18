@@ -7,6 +7,7 @@ from typing import TypeVar
 
 T = TypeVar("T")
 
+
 class AdapterInterface(ABC):
     @staticmethod
     @abstractmethod
@@ -45,12 +46,7 @@ class AdapterInterface(ABC):
 
     @staticmethod
     @abstractmethod
-    def handle_result(result: Result, reporter = None ):
-        pass
-
-    @staticmethod
-    @abstractmethod
-    def is_asset_in_export_package() -> bool:
+    def handle_result(result: Result, reporter=None):
         pass
 
     @staticmethod
@@ -60,11 +56,5 @@ class AdapterInterface(ABC):
 
     @staticmethod
     @abstractmethod
-    def create_export_package():
+    def create_export_package(selection) -> AssetPackage:
         pass
-
-    @staticmethod
-    @abstractmethod
-    def find_module():
-        pass
-

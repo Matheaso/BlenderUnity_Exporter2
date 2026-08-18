@@ -1,7 +1,8 @@
 import bpy
 
+from exporter_tool2.adapters.blender.blender_adapter import BlenderAdapter
+from exporter_tool2.adapters.blender.component_adapter import BlenderComponentAdapter
 from exporter_tool2.core.validation.logging.validation_reporting import ValidationReport
-from exporter_tool2.adapters.blender.helpers import create_export_context
 from exporter_tool2.core.config_data import ExporterConfigData
 from exporter_tool2.core.serialization import load_config
 from exporter_tool2.core.config_data import AssetTypeData
@@ -19,21 +20,28 @@ class EXPORTER_OT_exporter(bpy.types.Operator):
 
         all_issues = []
 
-        if not context.selected_objects:
-            self.report({'ERROR'}, "No objects selected")
-            return {'FINISHED'}
+        selection = BlenderAdapter.get_selected_object(context.active_object)
+        if not selection:
+            self.report({'ERROR'}, "Select an object")
 
-        asset_package = create_export_context(context)
+        root = BlenderAdapter.get_export_package_from_selection(selection)
+
+        if not root:
+            self.report({'ERROR'}, "Couldn't find root object")
+
         config = load_config()
         active_asset_type = get_active_asset_type(context, config)
+        asset_package = BlenderAdapter.create_export_package(context)
 
         for rule_id in active_asset_type.rule_id:
             rule_class = get_rule_class(rule_id)
             rule = rule_class()
 
-            for component in rule_class.needed_components:
-                for asset in asset_package.objects:
-                    asset.get_or_create_component(component)
+            for asset in asset_package.objects:
+                blender_obj = bpy.data.objects.get(asset.name)
+                for component in rule_class.needed_components:
+                    new_comp = BlenderComponentAdapter.create_component(blender_obj, component)
+                    asset.add_component(new_comp)
 
             report = rule.validate(asset_package, active_asset_type)
             all_issues.extend(report.issues)
@@ -63,6 +71,7 @@ class EXPORTER_OT_exporter(bpy.types.Operator):
             exist_ok=True,
         )
 
+        # TODO: For now it is only one object. Export Package in progress...
         filename = context.selected_objects[0].name
         filepath = export_dir / f"{filename}.fbx"
 
@@ -85,7 +94,6 @@ class EXPORTER_OT_exporter(bpy.types.Operator):
         )
 
         return {'FINISHED'}
-
 
 
 def get_active_asset_type(context: bpy.types.Context, config: ExporterConfigData) -> AssetTypeData:

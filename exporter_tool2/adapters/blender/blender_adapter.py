@@ -1,4 +1,3 @@
-
 import bpy
 
 from exporter_tool2.core.types import PackageObjectType
@@ -9,8 +8,6 @@ from exporter_tool2.core.types import ObjectType
 
 
 class BlenderAdapter(AdapterInterface):
-
-
 
     @staticmethod
     def create_asset_data(obj: bpy.types.Object) -> AssetData:
@@ -90,17 +87,20 @@ class BlenderAdapter(AdapterInterface):
             return {'CANCELLED'}
 
     @staticmethod
-    def is_asset_in_export_package() -> bool:
-        pass
+    def create_export_package(selection: bpy.types.Context) -> AssetPackage | None:
+        if not selection:
+            return None
+
+        objects = []
+        for obj in selection.selected_objects:
+            data = AssetData(
+                name=obj.name,
+                object_type=ObjectType(obj.type),
+                components=[]
+            )
+            objects.append(data)
+        return AssetPackage(tuple(objects))
 
     @staticmethod
     def create_package_node():
-        pass
-
-    @staticmethod
-    def create_export_package():
-        pass
-
-    @staticmethod
-    def find_module():
         pass

@@ -1,56 +1,11 @@
-import bpy
 
 from exporter_tool2.config.helpers import get_asset_types
-from exporter_tool2.core.types import ObjectType, PackageObjectType
-from exporter_tool2.core.asset_data import AssetPackage, AssetData
-
 
 def get_blender_asset_types(self, context):
     return get_asset_types()
 
 
-def create_export_context(blender_context: bpy.types.Context) -> AssetPackage:
-    objects = []
-    for obj in blender_context.selected_objects:
-        data = AssetData(
-            name=obj.name,
-            object_type=ObjectType(obj.type),
-            components=[]
-        )
-        objects.append(data)
-    return AssetPackage(tuple(objects))
-
-
-def find_export_package_from_selection():
-    selection = bpy.context.active_object
-
-    for col in selection.users_collection:
-        if col.name.startswith("EP_"):
-            return col
-    return None
-
-
-def is_col_exist(col_name: str):
-        selection = bpy.context.active_object
-        export_package = None
-
-        for col in selection.users_collection:
-            if col.name.startswith("EP_"):
-                export_package = col
-
-        if export_package:
-            for col in selection.users_collection:
-                if col.name == col_name:
-                    return True
-        else:
-            return False
 
 
 
-def find_module(context, prefix: PackageObjectType):
-    for col in bpy.context.active_object.users_collection:
-        if col.name.startswith("EP_"):
-            for obj in col.objects:
-                if obj.name.startswith(prefix.value):
-                    return obj
-    return None
+

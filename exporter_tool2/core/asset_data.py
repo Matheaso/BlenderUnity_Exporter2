@@ -65,7 +65,7 @@ class AssetPackage:
 
         result = []
         for obj in self.objects:
-            if obj.is_mesh:
+            if obj.is_mesh():
                 result.append(obj)
 
         return tuple(result)

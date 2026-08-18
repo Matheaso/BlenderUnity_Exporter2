@@ -20,7 +20,7 @@ class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
         self.report({'INFO'}, f"Create Collision Operator: {self.shape_type}")
 
         # TODO: Temp only, one object at the time
-        selection = BlenderAdapter.get_selected_object()
+        selection = BlenderAdapter.get_selected_object(context.active_object)
         if not selection:
             return handle_result(self, Result.error("No object selected"))
 
