@@ -1,5 +1,5 @@
 > INFO: **Work In Progress...**  
-> repository title is temporal
+> repository title on github is temporal
 
 
 
@@ -12,6 +12,10 @@ Created by **Maciej "Matheas" Sojka**
 
 ## Features
 - DCC Agnostic (wip)
+  - One core, multiple adapters. Use DCC you like
+- Component-Based data
+  - Get data based of what validation rule need not all at once
+  - Add new components without reworking whole tool
 - Easy configuration of new Asset Types and validation rules
 - Modular validation system
 - UI separated from logic
@@ -42,6 +46,7 @@ Created by **Maciej "Matheas" Sojka**
 
 #### Work in progress:
 - 🟢 Dynamic Project Path  
+- 🟢 Component-based data   
 - 🟡 LOD support  
   - 🔴 Optional LOD ranges
   - 🔴 Optional auto decimate
@@ -52,6 +57,7 @@ Created by **Maciej "Matheas" Sojka**
   - 🔴 Convex
   - 🔴 Dynamic collision window with helpers
 - 🔴 Additional asset-type-specific windows  
+- 🔴 Selected Export Package context
 - 🔴 Export multiple meshes as separate files  
 - 🔴 Metadata support  
 - 🔴 Backward compatibility json  
