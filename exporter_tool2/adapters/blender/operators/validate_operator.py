@@ -30,11 +30,14 @@ class EXPORTER_OT_validation_test(bpy.types.Operator):
 
         config = load_config()
         active_asset_type = get_active_asset_type(context, config)
-        asset_package = BlenderAdapter.create_export_package(context)
+        asset_package = BlenderAdapter.create_asset_package_from_selection(context)
+
 
         for rule_id in active_asset_type.rule_id:
             rule_class = get_rule_class(rule_id)
             rule = rule_class()
+
+            # TODO: Creaete asset package here based on rule domain
 
             for asset in asset_package.objects:
                 blender_obj = bpy.data.objects.get(asset.name)

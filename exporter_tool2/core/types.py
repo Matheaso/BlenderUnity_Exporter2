@@ -6,9 +6,10 @@ class ObjectType(Enum):
     CURVE = "CURVE"
     OTHER = "OTHER"
 
-class PackageObjectType(Enum):
+class AssetDomain(Enum):
     PACKAGE = "PACKAGE"
-    MODULE = "MODULE"
+    OBJECT = "OBJECT"
     COLLISION = "COLLISION"
     LOD = "LOD"
     OCCLUDER = "OCCLUDER"
+    SKELETON = "SKELETON"

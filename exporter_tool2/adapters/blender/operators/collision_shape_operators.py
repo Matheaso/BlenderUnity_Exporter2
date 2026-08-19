@@ -2,7 +2,7 @@ import bpy
 
 from exporter_tool2.adapters.blender.blender_adapter import BlenderAdapter
 from exporter_tool2.core.asset_data import AssetData
-from exporter_tool2.core.types import ObjectType, PackageObjectType
+from exporter_tool2.core.types import ObjectType, AssetDomain
 from exporter_tool2.core.result import Result
 from exporter_tool2.core.modules.collision import CollisionService, CollisionShape
 from exporter_tool2.adapters.blender.logging.bl_result import handle_result
@@ -29,7 +29,7 @@ class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
         if not root_collection:
             return handle_result(self, Result.error("Couldn't find root collection"))
 
-        collision_module = root_collection.objects.get(PackageObjectType.COLLISION.value)
+        collision_module = root_collection.objects.get(AssetDomain.COLLISION.value)
 
         col_objs = tuple(
             AssetData(
@@ -69,9 +69,9 @@ class EXPORTER_OT_create_collision_shape(bpy.types.Operator):
 
         root_collection.objects.link(shape)
 
-        module = BlenderAdapter.get_module_from_root(root_collection, PackageObjectType.COLLISION)
+        module = BlenderAdapter.get_module_from_root(root_collection, AssetDomain.COLLISION)
         if not module:
-            return handle_result(self, Result.error(f"Couldn't find module: {PackageObjectType.COLLISION.value}"))
+            return handle_result(self, Result.error(f"Couldn't find module: {AssetDomain.COLLISION.value}"))
         shape.parent = module
 
         return handle_result(self, Result.ok(""))

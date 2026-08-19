@@ -5,6 +5,7 @@ from ..logging.validation_reporting import (
 from ...components import Transform
 from ...config_data import AssetTypeData
 from ...asset_data import AssetPackage
+from ...export_package import ExportPackage
 from ...validation.rule_interface import IValidationRule
 
 class IdentityScale(IValidationRule):
@@ -22,7 +23,7 @@ class IdentityScale(IValidationRule):
             asset_type_data: AssetTypeData
     ) -> ValidationReport:
 
-        self._begin_validation()
+        self._begin_report()
 
         for obj_data in asset_package.objects:
             transform = obj_data.get_component(Transform)

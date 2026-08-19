@@ -1,7 +1,7 @@
 import bpy
 
 from exporter_tool2.adapters.blender.blender_adapter import BlenderAdapter
-from exporter_tool2.core.types import PackageObjectType
+from exporter_tool2.core.types import AssetDomain
 
 
 # TODO: Should be from selection ExportPackage context
@@ -21,11 +21,11 @@ class EXPORTER_OT_collision_module_switch(bpy.types.Operator):
         context.scene.is_collision = not context.scene.is_collision
 
         if context.scene.is_collision:
-            if not BlenderAdapter.get_module_from_root(export_collection, PackageObjectType.COLLISION):
-                new_object = bpy.data.objects.new(PackageObjectType.COLLISION.value, None)
+            if not BlenderAdapter.get_module_from_root(export_collection, AssetDomain.COLLISION):
+                new_object = bpy.data.objects.new(AssetDomain.COLLISION.value, None)
                 export_collection.objects.link(new_object)
 
-        BlenderAdapter.create_export_package()
+        BlenderAdapter.create_asset_package_from_selection()
         return {'FINISHED'}
 
 # TODO: Change from collection to object
@@ -41,7 +41,7 @@ class EXPORTER_OT_lod_module_switch(bpy.types.Operator):
         context.scene.is_lod = not context.scene.is_lod
 
         if context.scene.is_lod:
-            if not BlenderAdapter.get_module_from_root(export_collection, PackageObjectType.LOD):
+            if not BlenderAdapter.get_module_from_root(export_collection, AssetDomain.LOD):
                 lod_collection = bpy.data.collections.new("LOD")
                 lod_collection.color_tag = "COLOR_03"
                 export_collection.children.link(lod_collection)

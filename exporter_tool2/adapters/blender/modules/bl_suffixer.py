@@ -23,7 +23,7 @@ class SUFFIXER_OT_suffix(bpy.types.Operator):
     def execute(self, context):
         self.report({'INFO'}, "Suffix Suffix")
 
-        asset_package = BlenderAdapter.create_export_package(context)
+        asset_package = BlenderAdapter.create_asset_package_from_selection(context)
         output = Suffixer.run_suffix(asset_package, self.suffix)
 
         if not output.success:
@@ -56,7 +56,7 @@ class SUFFIXER_OT_prefix(bpy.types.Operator):
     def execute(self, context):
         self.report({'INFO'}, "Suffix Prefix")
 
-        export_context = BlenderAdapter.create_export_package(context)
+        export_context = BlenderAdapter.create_asset_package_from_selection(context)
         output = Suffixer.run_prefix(export_context, self.prefix)
 
         if not output.success:
@@ -93,7 +93,7 @@ class SUFFIXER_OT_replace(bpy.types.Operator):
     def execute(self, context):
         self.report({'INFO'}, "Suffix Replace")
 
-        export_context = BlenderAdapter.create_export_package(context)
+        export_context = BlenderAdapter.create_asset_package_from_selection(context)
         output = Suffixer.run_replace(export_context, self.old, self.new)
 
         if not output.success:
@@ -115,7 +115,7 @@ class SUFFIXER_OT_auto(bpy.types.Operator):
     def execute(self, context):
         self.report({'INFO'}, "Suffix Auto")
 
-        export_context = BlenderAdapter.create_export_package(context)
+        export_context = BlenderAdapter.create_asset_package_from_selection(context)
         asset_type = context.scene.export_settings.asset_type
 
         output = Suffixer.run_auto(export_context, asset_type)

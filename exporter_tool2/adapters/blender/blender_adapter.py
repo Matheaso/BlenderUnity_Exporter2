@@ -1,6 +1,6 @@
 import bpy
 
-from exporter_tool2.core.types import PackageObjectType
+from exporter_tool2.core.types import AssetDomain
 from exporter_tool2.core.adapter_interfaces.adapter_interface import AdapterInterface
 from exporter_tool2.core.asset_data import AssetData, AssetPackage
 from exporter_tool2.core.result import Result
@@ -68,7 +68,7 @@ class BlenderAdapter(AdapterInterface):
         return None
 
     @staticmethod
-    def get_module_from_root(root: bpy.types.Collection, type: PackageObjectType) -> bpy.types.Object | None:
+    def get_module_from_root(root: bpy.types.Collection, type: AssetDomain) -> bpy.types.Object | None:
         for obj in root.objects:
             if obj.name.startswith(type.value):
                 return obj
@@ -87,7 +87,7 @@ class BlenderAdapter(AdapterInterface):
             return {'CANCELLED'}
 
     @staticmethod
-    def create_export_package(selection: bpy.types.Context) -> AssetPackage | None:
+    def create_asset_package_from_selection(selection: bpy.types.Context) -> AssetPackage | None:
         if not selection:
             return None
 

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from exporter_tool2.core.types import PackageObjectType
+from exporter_tool2.core.types import AssetDomain
 from exporter_tool2.core.result import Result
 from exporter_tool2.core.asset_data import AssetPackage, AssetData
 from typing import TypeVar
@@ -41,7 +41,7 @@ class AdapterInterface(ABC):
 
     @staticmethod
     @abstractmethod
-    def get_module_from_root(root, type: PackageObjectType) -> str | None:
+    def get_module_from_root(root, type: AssetDomain) -> str | None:
         pass
 
     @staticmethod
@@ -56,5 +56,5 @@ class AdapterInterface(ABC):
 
     @staticmethod
     @abstractmethod
-    def create_export_package(selection) -> AssetPackage:
+    def create_asset_package_from_selection(selection) -> AssetPackage:
         pass

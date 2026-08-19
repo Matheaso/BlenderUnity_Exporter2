@@ -1,11 +1,11 @@
 from dataclasses import dataclass
-from exporter_tool2.core.types import PackageObjectType
+from exporter_tool2.core.types import AssetDomain
 
 
 @dataclass(frozen=True)
 class PackageNode:
     name: str
-    parent: PackageObjectType
+    parent: AssetDomain
 
 
 @dataclass(frozen=True)
