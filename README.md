@@ -16,6 +16,9 @@ Created by **Maciej "Matheas" Sojka**
 - Component-Based data
   - Get data based of what validation rule need not all at once
   - Add new components without reworking whole tool
+- Validation Rules Domains
+  - different type of asset in export package is validated differently
+- Adapter Interfaces
 - Easy configuration of new Asset Types and validation rules
 - Modular validation system
 - UI separated from logic
@@ -34,9 +37,10 @@ Created by **Maciej "Matheas" Sojka**
 - 🟢 Rules
 - 🟢 Validation
 - 🟢 Collision
-- 🔴 Export
+- 🟢 Export
+- 🟢 Export Collection
 - 🔴 LOD support
-- 🔴 Export Collection
+
 
 ### Adapters:
 - 🟡 Blender
@@ -47,10 +51,11 @@ Created by **Maciej "Matheas" Sojka**
 #### Work in progress:
 - 🟢 Dynamic Project Path  
 - 🟢 Component-based data   
+- 🟢 Export Collection  
+- 🟢 Rule check domain
 - 🟡 LOD support  
   - 🔴 Optional LOD ranges
   - 🔴 Optional auto decimate
-- 🟡 Export Collection  
 - 🟡 Collision support  
   - 🟢 Cube/Sphere Shape
   - 🔴 Capsule
