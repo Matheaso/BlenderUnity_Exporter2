@@ -104,3 +104,19 @@ class BlenderAdapter(AdapterInterface):
     @staticmethod
     def create_package_node():
         pass
+
+    @staticmethod
+    def get_export_objects(root: bpy.types.Collection) -> tuple[bpy.types.Object, ...]:
+        objects = []
+
+        valid_domains = {
+            domain.value
+            for domain in AssetDomain
+        }
+
+        for module in root.objects:
+            if module.name not in valid_domains:
+                continue
+            objects.extend(module.children)
+
+        return tuple(objects)

@@ -1,0 +1,1 @@
+# TODO: For true multi DCC tool exporter_settings.json should be stored in appdata

@@ -1,7 +1,7 @@
 import bpy
 
 from exporter_tool2.adapters.blender.operators import EXPORTER_OT_lod_module_switch, \
-    EXPORTER_OT_collision_module_switch, EXPORTER_OT_validation_test
+    EXPORTER_OT_collision_module_switch, EXPORTER_OT_validation_test, EXPORT_OT_export_collection_operator
 
 from exporter_tool2.adapters.blender.operators import (
     EXPORTER_OT_CreateExportPackage
@@ -9,9 +9,7 @@ from exporter_tool2.adapters.blender.operators import (
 from exporter_tool2.adapters.blender.modules.bl_suffixer import (
     SUFFIXER_OT_prefix, SUFFIXER_OT_replace, SUFFIXER_OT_suffix, SUFFIXER_OT_auto
 )
-from exporter_tool2.adapters.blender.operators.export_operator import (
-    EXPORTER_OT_exporter
-)
+
 
 
 class EXPORTER_PT_sidebar(bpy.types.Panel):
@@ -26,7 +24,7 @@ class EXPORTER_PT_sidebar(bpy.types.Panel):
         layout = self.layout
 
         layout.operator(
-            EXPORTER_OT_exporter.bl_idname,
+            EXPORT_OT_export_collection_operator.bl_idname,
             text="Export selected",
         )
 

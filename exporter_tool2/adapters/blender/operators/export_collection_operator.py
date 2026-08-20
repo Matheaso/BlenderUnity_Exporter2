@@ -1,21 +1,33 @@
+import os
+import time
+
 import bpy
 
 from exporter_tool2.adapters.blender.blender_adapter import BlenderAdapter
 from exporter_tool2.adapters.blender.component_adapter import BlenderComponentAdapter
+from exporter_tool2.adapters.blender.export_adapter import BlenderExportAdapter
 from exporter_tool2.adapters.blender.logging.blender_report import BlenderValidationReporter
 from exporter_tool2.adapters.blender.operators.export_operator import get_active_asset_type
 from exporter_tool2.core.serialization import load_config
+from exporter_tool2.core.types import AssetDomain
 from exporter_tool2.core.validation.logging.validation_reporting import ValidationReport
 from exporter_tool2.core.validation.rule_registry import get_rule_class
 
 
-class EXPORTER_OT_validation_test(bpy.types.Operator):
-    bl_idname = "export.validate_operator"
-    bl_label = "Validate Operator"
-    bl_description = "Validate Operator"
+# TODO: There should be separeted function or class for Validate
+#      exportInterface maybe? It is connected with it
 
-    def execute(self, context: bpy.types.Context) -> bpy.types.Operator:
-        self.report({'INFO'}, "Validate Test Operator")
+class EXPORT_OT_export_collection_operator(bpy.types.Operator):
+    bl_idname = "export.export_collection_operator"
+    bl_label = "Export Selected Collection"
+    bl_description = "Export Selected Collection"
+
+    def execute(self, context):
+
+        # TODO: temporal time counter
+        start = time.perf_counter()
+
+        self.report({'INFO'}, "Export Collection Operator")
 
         all_issues = []
 
@@ -70,5 +82,18 @@ class EXPORTER_OT_validation_test(bpy.types.Operator):
         if not validation_report.is_valid:
             self.report({'ERROR'}, "Export failed")
             return {"CANCELLED"}
+
+        # Export Collection
+        export_objects = BlenderAdapter.get_export_objects(root)
+
+        exporter = BlenderExportAdapter(active_asset_type)
+        file_name = BlenderAdapter.get_module_from_root(root, AssetDomain.OBJECT).children[0].name
+        exporter.export(export_objects, file_name)
+
+        elapsed = time.perf_counter() - start
+
+        # TODO: temporal time counter
+        self.report({'INFO'}, f"Export Took: {elapsed:.3f} seconds")
+        os.startfile(exporter.filepath)
 
         return {'FINISHED'}

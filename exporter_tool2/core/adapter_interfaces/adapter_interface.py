@@ -58,3 +58,8 @@ class AdapterInterface(ABC):
     @abstractmethod
     def create_asset_package_from_selection(selection) -> AssetPackage:
         pass
+
+    @staticmethod
+    @abstractmethod
+    def get_export_objects(root):
+        pass
