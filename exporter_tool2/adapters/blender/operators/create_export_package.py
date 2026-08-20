@@ -1,5 +1,6 @@
 import bpy
 
+
 class EXPORTER_OT_CreateExportPackage(bpy.types.Operator):
     bl_idname = "exporter.create_export_package"
     bl_label = "Create Export Package"
@@ -9,12 +10,7 @@ class EXPORTER_OT_CreateExportPackage(bpy.types.Operator):
 
         obj = context.active_object
 
-        #TODO: It is a guard for now, later it should be possible to put more
-        # than one object into export package
-        if len(context.selected_objects) > 1:
-            self.report({'ERROR'}, "Select one object")
-            return {'CANCELLED'}
-
+        # TODO: One object for now, more later
         if not obj or obj.type != 'MESH':
             self.report({'ERROR'}, "No mesh object selected")
             return {'CANCELLED'}
@@ -33,12 +29,19 @@ class EXPORTER_OT_CreateExportPackage(bpy.types.Operator):
 
         collection.objects.link(obj)
 
+        parent = bpy.data.objects.new("OBJECT", None)
+        collection.objects.link(parent)
+
+        parent.matrix_world.identity()
+
+        for selected_obj in context.selected_objects:
+            world_matrix = selected_obj.matrix_world.copy()
+
+            selected_obj.parent = parent
+            context.view_layer.update()
+            selected_obj.matrix_world = world_matrix
+
         return {'FINISHED'}
-
-
-#TODO: LOD0 is the main object so no need obj without LOD. Collection is enough
-
-
 
 
 def isAlreadyInValidCollection(obj) -> bool:

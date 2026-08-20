@@ -5,7 +5,7 @@ from ..logging.validation_reporting import (
 from ...components import Transform
 from ...config_data import AssetTypeData
 from ...asset_data import AssetPackage
-from ...export_package import ExportPackage
+from ...types import AssetDomain
 from ...validation.rule_interface import IValidationRule
 
 class IdentityScale(IValidationRule):
@@ -16,6 +16,7 @@ class IdentityScale(IValidationRule):
                    )
 
     needed_components = (Transform,)
+    rule_domain = (AssetDomain.OBJECT,)
 
     def validate(
             self,
@@ -24,6 +25,10 @@ class IdentityScale(IValidationRule):
     ) -> ValidationReport:
 
         self._begin_report()
+
+        self._add_issue(
+            ValidationIssue.info("Identity Scale Started...")
+        )
 
         for obj_data in asset_package.objects:
             transform = obj_data.get_component(Transform)

@@ -31,14 +31,12 @@ class IValidationRule(ABC):
             issues=tuple(self.issues),
         )
 
-    def _get_domain_objects(self, package: ExportPackage) -> AssetPackage:
-
     @abstractmethod
     def validate(
             self,
             asset_package: AssetPackage,
             asset_type_data: AssetTypeData,
-    )-> ValidationReport:
+    ) -> ValidationReport:
         self.issues = []
 
         return ValidationReport(

@@ -1,9 +1,11 @@
+from .rules.col_naming_base_rule import COLNamingRule
 from .rules.naming_rule import NameRule
 from .rules.uniform_scale_rule import IdentityScale
 
 RULE_REGISTRY = {
     NameRule.rule_id: NameRule,
     IdentityScale.rule_id: IdentityScale,
+    COLNamingRule.rule_id: COLNamingRule,
 }
 
 def get_rule_class(rule_id: str):

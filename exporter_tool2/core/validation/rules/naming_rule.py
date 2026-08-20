@@ -14,7 +14,7 @@ class NameRule(IValidationRule):
     description = "Naming convention"
 
     needed_components = ()
-    rule_domain = (AssetDomain.OBJECT)
+    rule_domain = (AssetDomain.OBJECT,)
 
     def validate(
         self,
@@ -22,25 +22,24 @@ class NameRule(IValidationRule):
         asset_type_data: AssetTypeData,
     ) -> ValidationReport:
 
-        issues = []
+        self._begin_report()
+
+        self._add_issue(
+            ValidationIssue.info("NameRule Started...")
+        )
 
         naming = asset_type_data.naming_convention
 
         for obj_context in asset_package.objects:
             if naming.prefix and not obj_context.name.startswith(naming.prefix):
-                issues.append(
-                    ValidationIssue.error(
-                        f"Object '{obj_context.name}' must start with '{naming.prefix}'."
-                    )
+                self._add_issue(
+                    ValidationIssue.error(f"Object '{obj_context.name}' must start with '{naming.prefix}'.")
                 )
 
             if naming.suffix and not obj_context.name.endswith(naming.suffix):
-                issues.append(
-                    ValidationIssue.error(
-                        f"Object '{obj_context.name}' must end with '{naming.suffix}'."
-                    )
+                self._add_issue(
+                    ValidationIssue.error(f"Object '{obj_context.name}' must end with '{naming.suffix}'.")
                 )
 
-        return ValidationReport(
-            issues=tuple(issues)
-        )
+
+        return self._return_report()

@@ -25,7 +25,7 @@ class EXPORTER_OT_collision_module_switch(bpy.types.Operator):
                 new_object = bpy.data.objects.new(AssetDomain.COLLISION.value, None)
                 export_collection.objects.link(new_object)
 
-        BlenderAdapter.create_asset_package_from_selection()
+        BlenderAdapter.create_asset_package_from_selection(context)
         return {'FINISHED'}
 
 # TODO: Change from collection to object

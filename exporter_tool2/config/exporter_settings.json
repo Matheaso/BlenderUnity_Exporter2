@@ -9,7 +9,8 @@
                 "suffix": ""
             },
             "rule_id": [
-                "identity_scale"
+                "identity_scale",
+                "col_naming_rule"
             ],
             "relative_path": "Assets/Graphics/Enviro"
         },
