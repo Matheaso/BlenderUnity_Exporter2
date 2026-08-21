@@ -14,11 +14,14 @@ class Transform(Component):
     scale: Float3
     pivot: Float3
 
+    @property
     def is_scale_identity(self) -> bool:
         return self.scale == (1.0, 1.0, 1.0)
 
+    @property
     def is_pivot_zeroed(self) -> bool:
         return self.pivot == (0, 0, 0)
 
+    @property
     def is_rotation_zeroed(self) -> bool:
         return self.rotation == (0, 0, 0)

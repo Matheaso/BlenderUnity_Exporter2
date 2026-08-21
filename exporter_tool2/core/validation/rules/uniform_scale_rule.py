@@ -33,7 +33,7 @@ class IdentityScale(IValidationRule):
         for obj_data in asset_package.objects:
             transform = obj_data.get_component(Transform)
 
-            if not transform.is_scale_identity():
+            if not transform.is_scale_identity:
                 self._add_issue(
                     ValidationIssue.error(
                         f"{obj_data.name}: Has scale different than identity. Apply scale to continue."
